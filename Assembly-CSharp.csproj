@@ -65,13 +65,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AudioController.cs" />
+    <Compile Include="Assets\Scripts\CSTrigger.cs" />
     <Compile Include="Assets\Scripts\CameraController.cs" />
+    <Compile Include="Assets\Scripts\CutSceneManager.cs" />
     <Compile Include="Assets\Scripts\MainMenuController.cs" />
+    <Compile Include="Assets\Scripts\MaskController.cs" />
+    <Compile Include="Assets\Scripts\NPC1Movement.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\ThinkingController.cs" />
     <Compile Include="Assets\Scripts\TypingManager.cs" />
-    <None Include="Assets\Music\Peaceful Wanderings\Loopable files\ReadMe.txt" />
-    <None Include="Assets\Music\Peaceful Wanderings\Extended versions\ReadMe.txt" />
+    <Compile Include="Assets\Scripts\VolumeControl.cs" />
+    <None Include="Assets\Sounds\Peaceful Wanderings\Loopable files\ReadMe.txt" />
+    <None Include="Assets\Sounds\Peaceful Wanderings\Extended versions\ReadMe.txt" />
     <None Include="Assets\Credits.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.18f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

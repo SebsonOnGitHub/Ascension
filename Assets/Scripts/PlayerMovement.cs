@@ -6,7 +6,6 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public ThinkingController thinkingController;
-    public LayerMask groundLayer;
 
     private Rigidbody2D body;
     private Animator anim;
@@ -15,10 +14,10 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D boxCollider;
 
     public float speed;
-    private bool movable;
-    
+    private static bool movable;
+    public static bool thinkable;
 
-    // Start is called before the first frame update
+
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
@@ -26,15 +25,20 @@ public class PlayerMovement : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         playerSprite = GetComponentInChildren<SpriteRenderer>();
         movable = false;
+        thinkable = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        //FLUMKOD TA BORT NÄR DE SLUTAR VA KUL
+        if(CutSceneManager.currentCutscene == 5)
+            gameObject.transform.Rotate(1.0f, 1.0f, 1.0f, Space.Self);
+
+        AudioController.walkingPlayer = anim.GetBool("run");
+
         if (thinkingController.getThinkingState())
         {
             anim.SetBool("run", false);
-            anim.SetBool("grounded", isGrounded());
             return;
         }
 
@@ -52,28 +56,16 @@ public class PlayerMovement : MonoBehaviour
 
         playerSprite.flipX = direction == 1;
 
-        //if (Input.GetKey(KeyCode.Space) & isGrounded() & movable)
-        //Jump();
-
         anim.SetBool("run", horizontalInput != 0);
-        anim.SetBool("grounded", isGrounded());
     }
 
-    private void Jump()
-    {
-        body.velocity = new Vector2(body.velocity.x, speed);
-        anim.SetTrigger("jump");
-    }
-
-    private bool isGrounded()
-    {
-        RaycastHit2D raycastHit = Physics2D.BoxCast(boxCollider.bounds.center, boxCollider.bounds.size, 0, Vector2.down, 0.1f, groundLayer);
-        return raycastHit.collider != null;
-    }
-
-    public void toggleMovable(bool canMove)
+    public static void toggleMovable(bool canMove)
     {
         movable = canMove;
     }
 
+    public static void toggleThinkable(bool canAct)
+    {
+        thinkable = canAct;
+    }
 }

@@ -3,17 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class MainMenuController : MonoBehaviour
 {
-    private Button selectButton;
-
+    private bool firstEnable = true;
+    public MainMenuController backToScreen;
 
     void Start()
     {
-        selectButton = GetComponentInChildren<Button>();
+        SelectFirstElement();
+    }
 
-        selectButton.Select();
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) & backToScreen != null)
+        {
+            backToScreen.gameObject.SetActive(true);
+            this.gameObject.SetActive(false);
+        }
     }
 
     public void PlayGame()
@@ -25,5 +33,26 @@ public class MainMenuController : MonoBehaviour
     {
         Debug.Log("Quit!");
         Application.Quit();
+    }
+
+    private void OnEnable()
+    {
+        if (!firstEnable | this.gameObject.name != "MainMenu")
+        {
+                SelectFirstElement();
+        }
+        else
+            firstEnable = false;
+    }
+
+    private void SelectFirstElement()
+    {
+        foreach (Selectable selectable in transform.GetComponentsInChildren<Selectable>())
+        {
+            if(selectable.tag == "FirstElement")
+            {
+                selectable.Select();
+            }
+        }
     }
 }

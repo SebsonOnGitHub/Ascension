@@ -4,27 +4,58 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
-    public AudioClip birdClip;
-    public AudioSource birdSource;
-    public float minWaitBetweenPlays = 1f;
-    public float maxWaitBetweenPlays = 5f;
-    public float waitTimeCountdown = -1f;
+    public AudioSource[] audioSources;
+    public float minWaitBetweenPlays;
+    public float maxWaitBetweenPlays;
+    public static bool walkingPlayer;
+    public static bool walkingNPC1;
+
+    private float waitTimeCountdownBirds;
+
+
+    private void Start()
+    {
+        audioSources = GetComponentsInChildren<AudioSource>();
+        waitTimeCountdownBirds = Random.Range(minWaitBetweenPlays, maxWaitBetweenPlays);
+        walkingPlayer = false;
+        walkingNPC1 = false;
+    }
 
 
     void Update()
     {
-        if (!birdSource.isPlaying)
+        foreach (AudioSource source in audioSources)
         {
-            if (waitTimeCountdown < 0f)
+            if (source.name.Equals("WalkingPlayer"))
             {
-                birdSource.clip = birdClip;
-                birdSource.Play();
-                waitTimeCountdown = Random.Range(minWaitBetweenPlays, maxWaitBetweenPlays);
+                if (walkingPlayer & !source.isPlaying)
+                    source.Play();
+
+                if (!walkingPlayer & source.isPlaying)
+                    source.Stop();
             }
-            else
+
+            if (source.name.Equals("WalkingNPC1"))
             {
-                waitTimeCountdown -= Time.deltaTime;
+                if (walkingNPC1 & !source.isPlaying)
+                    source.Play();
+
+                if (!walkingNPC1 & source.isPlaying)
+                    source.Stop();
+            }
+
+            if (source.name.Equals("BirdAudio") & !source.isPlaying)
+            {
+                if (waitTimeCountdownBirds < 0f)
+                {
+                    source.Play();
+                    waitTimeCountdownBirds = Random.Range(minWaitBetweenPlays, maxWaitBetweenPlays);
+                }
+                else
+                    waitTimeCountdownBirds -= Time.deltaTime;
             }
         }
+        
     }
+
 }
