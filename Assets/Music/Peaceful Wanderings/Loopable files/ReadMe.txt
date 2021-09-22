@@ -1,0 +1,3 @@
+Hello ^^
+
+Thank you so much for purchasing this audio pack, these files are ready to be looped and do not require any further editing on your part, just insert them to your project and its good to go! For best results I recommend choosing them OGG and/or WAV formats since MP3's can sometimes be a bit problematic when it comes to audio loops. I hope you enjoy listening and using these songs as much as I enjoyed making them. You are free to use this music in any way you like, no credits in any way, shape or form are necessary. However I would love to see what you make with them, so please drop me a line at rbt.meadow@gmail.com if you do end up using them. Again, thank you so much, I hope our paths cross again and until then, happy art making!!!
