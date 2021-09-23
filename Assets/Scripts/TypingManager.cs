@@ -31,12 +31,11 @@ public class TypingManager : MonoBehaviour
     void Start()
     {
 
-	
+	currDisplay.text = sentence.startText;
         sentence.pointerIndex = sentence.startText.Length;
 	
         setpointer();
-        //currDisplay.text = sentence.startText.Insert(sentence.pointerIndex, pointerSymbol);
-	//pointerDisplay.text = sentence.pointerText.insert(sentence.pointerIndex,pointerSymbol);
+ 
     }
 
     void Update()
@@ -44,9 +43,10 @@ public class TypingManager : MonoBehaviour
         if(!goalWasReached)
             goalWasReached = sentence.isGoalReached(thinkingController);
 
+	pointerDisplay.gameObject.SetActive(thinkingController.showThought);
         currDisplay.gameObject.SetActive(thinkingController.showThought);
         removedDisplay.gameObject.SetActive(thinkingController.showThought);
-	pointerDisplay.gameObject.SetActive(thinkingController.showThought);
+	
 	
         timeInterval += Time.deltaTime;
         timeAnimation += Time.deltaTime;
@@ -112,8 +112,7 @@ public class TypingManager : MonoBehaviour
         string spaces = "";
 	for (int i = 0; i< sentence.currText.Length;i++)
 	{spaces +=" ";}
-	//spaces.Insert(sentence.pointerIndex,pointerSymbol);
-        pointerDisplay.text = spaces.Insert(sentence.pointerIndex,pointerSymbol);
+	pointerDisplay.text = spaces.Insert(sentence.pointerIndex,pointerSymbol);
 	sentence.pointerText = pointerDisplay.text;
         
     }

@@ -44,13 +44,14 @@ public class NPC1Movement : MonoBehaviour
 		
 		if(Input.GetKeyDown(KeyCode.Return) )
 		{
-		    PlayerMovement.toggleThinkable(true);
+		    
 		    
 		    CutSceneManager.IncreaseCutScene();
 		}
                 break;
             case 4: // walk away and reveal the hint.
 		Destroy(bubble_object);
+		PlayerMovement.toggleThinkable(true);
 		anim.SetBool("run", true);
                 body.velocity = new Vector2(speed, body.velocity.y);
                 body.GetComponent<SpriteRenderer>().flipX = true;
