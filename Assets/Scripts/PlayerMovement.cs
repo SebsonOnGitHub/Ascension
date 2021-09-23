@@ -30,10 +30,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //FLUMKOD TA BORT NÄR DE SLUTAR VA KUL
-        if(CutSceneManager.currentCutscene == 5)
-            gameObject.transform.Rotate(1.0f, 1.0f, 1.0f, Space.Self);
-
+        
         AudioController.walkingPlayer = anim.GetBool("run");
 
         if (thinkingController.getThinkingState())

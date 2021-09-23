@@ -16,6 +16,10 @@ public class CutSceneManager : MonoBehaviour
     {
         currentCutscene++;
     }
+    public static void EndCutScene()
+    {
+	currentCutscene = -1;
+    }
 
     public static int getCurrentCutScene()
     {
