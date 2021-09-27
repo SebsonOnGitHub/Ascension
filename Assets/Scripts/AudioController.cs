@@ -9,6 +9,7 @@ public class AudioController : MonoBehaviour
     public float maxWaitBetweenPlays;
     public static bool walkingPlayer;
     public static bool walkingNPC1;
+    public static bool Dialogue_sound;
 
     private float waitTimeCountdownBirds;
 
@@ -19,6 +20,7 @@ public class AudioController : MonoBehaviour
         waitTimeCountdownBirds = Random.Range(minWaitBetweenPlays, maxWaitBetweenPlays);
         walkingPlayer = false;
         walkingNPC1 = false;
+	Dialogue_sound = false;
     }
 
 
@@ -54,6 +56,18 @@ public class AudioController : MonoBehaviour
                 else
                     waitTimeCountdownBirds -= Time.deltaTime;
             }
+	    if(source.name.Equals("Dialogue_sound"))
+	    {
+		if(Dialogue_sound &!source.isPlaying)
+		{
+		    source.Play();
+		}
+		if(!Dialogue_sound & source.isPlaying)
+		{
+		    source.Stop();
+		}
+		
+	    }
         }
         
     }

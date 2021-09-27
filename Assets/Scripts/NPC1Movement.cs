@@ -2,27 +2,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class NPC1Movement : MonoBehaviour
 {
     private Rigidbody2D body;
     private Animator anim;
     public float speed;
-    public GameObject speech_bubble;
-    private GameObject bubble_object;
-
+    public speech_bubble_controller speech_bubble;
+    public string Dialogue;
+    private bool once;
     void Start()
     {
-	
+	//Dialogue_text.text = Dialogue;
+
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         CutSceneManager.IncreaseCutScene();
+	once = true;
     }
 
     void Update()
     {
         AudioController.walkingNPC1 = anim.GetBool("run");
-
         switch (CutSceneManager.getCurrentCutScene())
         {
             case 0:
@@ -34,23 +36,22 @@ public class NPC1Movement : MonoBehaviour
             case 2: // stop walking, spawn speech bubble
                 anim.SetBool("run", false);
                 body.velocity = new Vector2(0, body.velocity.y);
-		bubble_object = Instantiate(speech_bubble, new Vector3(0, 0, 0), Quaternion.identity) as GameObject;
-	        bubble_object.transform.parent = GameObject.Find("Monk1").transform;
-	        
-	       
-                CutSceneManager.IncreaseCutScene();
+		CutSceneManager.IncreaseCutScene();
 		break;
             case 3: // start talking until player inputs "return"
-		
+		if(once)
+		{
+		    speech_bubble.show (Dialogue);
+		    once = false;
+		}
 		if(Input.GetKeyDown(KeyCode.Return) )
 		{
-		    
-		    
 		    CutSceneManager.IncreaseCutScene();
 		}
                 break;
             case 4: // walk away and reveal the hint.
-		Destroy(bubble_object);
+		speech_bubble.close();
+		//speech_bubble.
 		PlayerMovement.toggleThinkable(true);
 		anim.SetBool("run", true);
                 body.velocity = new Vector2(speed, body.velocity.y);
@@ -67,5 +68,6 @@ public class NPC1Movement : MonoBehaviour
                 Debug.Log("Fault in NPC1Movement");
                 break;
         }
+
     }
 }
