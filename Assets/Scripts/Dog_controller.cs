@@ -7,9 +7,11 @@ public class Dog_controller : MonoBehaviour
     // Start is called before the first frame update
     private  Animator anim;
     private BoxCollider2D boxCollider;
-    
+    public PlayerMovement player;
+    private bool nice;
     void Start()
     {
+	nice = false;
 	anim = GetComponent<Animator>();
 	boxCollider = GetComponent<BoxCollider2D>();
     }
@@ -23,29 +25,33 @@ public class Dog_controller : MonoBehaviour
 	anim.SetTrigger("Stop_bark");
 	AudioController.Dog_bark=false;
 	
-	PlayerMovement.CutSceneRun(-200.0f,5.1f);
-	PlayerMovement.toggleThinkable(true);
-	PlayerMovement.toggleMovable(true);
+        PlayerMovement.CutSceneRun(-200.0f,5.1f);
+	player.toggleThinkable(true);
+	player.toggleMovable(true);
 	
     }
+    /*
     public void Stop_Transition()
     {
+	//remove block of doggy
 	anim.SetTrigger("Nice");
-	PlayerMovement.toggleThinkable(true);
-	PlayerMovement.toggleMovable(true);
+        
     }
+    */
     private void OnTriggerEnter2D(Collider2D other)
     {
-	PlayerMovement.toggleThinkable(false);
-	PlayerMovement.toggleMovable(false);
+	if (nice)
+	    return;
+	
+        player.toggleThinkable(false);
+        player.toggleMovable(false);
 	AudioController.Dog_bark=true;
 	anim.SetTrigger("Bark");
 	
     }
     public void Become_nice()
     {
-	PlayerMovement.toggleThinkable(false);
-	PlayerMovement.toggleMovable(false);
+        Destroy(boxCollider);
 	anim.SetTrigger("Transition");
 
     }

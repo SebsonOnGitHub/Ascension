@@ -40,6 +40,24 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 984777275
+    locked: 0
+  - name: IndoorWall
+    uniqueID: 3642973253
+    locked: 0
+  - name: Base
+    uniqueID: 783400789
+    locked: 0
+  - name: FrontBase
+    uniqueID: 2646104289
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Player
+    uniqueID: 1021657105
+    locked: 0
+  - name: InFrontPlayer
+    uniqueID: 1887177585
     locked: 0

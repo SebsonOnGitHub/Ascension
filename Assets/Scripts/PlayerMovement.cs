@@ -16,8 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private static int CSrunDirection;
     private static float CSmoveSpeed;
     public float speed;
-    private static bool movable;
-    public static bool thinkable;
+    public bool movable;
+    public bool thinkable;
 
 
     void Start()
@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+	//TODO: Remove legacy code.
 	AudioController.walkingPlayer = anim.GetBool("run");
         if (CSrunning >0)
 	{
@@ -64,7 +65,8 @@ public class PlayerMovement : MonoBehaviour
 	anim.SetBool("run", horizontalInput != 0);
 	
     }
-    public static void CutSceneRun(float xoffset,float movespeed)
+    
+    public static void CutSceneRun(float xoffset,float movespeed) // should not be static.
     {
 	if( xoffset < 0.0f)
 	    CSrunDirection = -1;
@@ -73,14 +75,15 @@ public class PlayerMovement : MonoBehaviour
 	CSmoveSpeed = movespeed;
 	
 	CSrunning = Math.Abs((int) Mathf.Ceil( (float) (xoffset / movespeed )));
+
     }
 
-    public static void toggleMovable(bool canMove)
+    public void toggleMovable(bool canMove)
     {
         movable = canMove;
     }
 
-    public static void toggleThinkable(bool canAct)
+    public void toggleThinkable(bool canAct)
     {
         thinkable = canAct;
     }

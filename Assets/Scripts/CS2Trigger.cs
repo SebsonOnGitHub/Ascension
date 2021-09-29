@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CS2Trigger : MonoBehaviour
 {
+    public PlayerMovement player;
     private bool once = true;
     public int triggerNumber;
     public speech_bubble_controller speech_bubble;
@@ -11,7 +12,7 @@ public class CS2Trigger : MonoBehaviour
     {
 	if(once)
 	{
-	    PlayerMovement.toggleThinkable(false);
+	    player.toggleThinkable(false);
 	    speech_bubble.show("hej kom och köp mina päron snälla");
 	    once=false;
 	}

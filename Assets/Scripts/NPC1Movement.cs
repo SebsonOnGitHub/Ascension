@@ -6,15 +6,24 @@ using UnityEngine.UI;
 
 public class NPC1Movement : MonoBehaviour
 {
-    private Rigidbody2D body;
-    private Animator anim;
     public float speed;
+
     public speech_bubble_controller speech_bubble;
     public string Dialogue;
     private bool once;
+
+
+
+    // TODO: TA bort LEGACY code
+
+    public PlayerMovement player;
+
+    private Rigidbody2D body;
+    private Animator anim;
+
+
     void Start()
     {
-	//Dialogue_text.text = Dialogue;
 
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -36,6 +45,7 @@ public class NPC1Movement : MonoBehaviour
             case 2: // stop walking, spawn speech bubble
                 anim.SetBool("run", false);
                 body.velocity = new Vector2(0, body.velocity.y);
+
 		CutSceneManager.IncreaseCutScene();
 		break;
             case 3: // start talking until player inputs "return"
@@ -51,19 +61,19 @@ public class NPC1Movement : MonoBehaviour
                 break;
             case 4: // walk away and reveal the hint.
 		speech_bubble.close();
-		PlayerMovement.toggleThinkable(true);
+	        player.toggleThinkable(true);
 		anim.SetBool("run", true);
+
                 body.velocity = new Vector2(speed, body.velocity.y);
                 body.GetComponent<SpriteRenderer>().flipX = true;
                 MaskController.follow = true;
-	       
                 break;
-	    case 5:  //disappear and kill self.
-		MaskController.follow = false;
+	        case 5:  //disappear and kill self.
+		        MaskController.follow = false;
                 AudioController.walkingNPC1=false;
                 Destroy(gameObject);
-		break;
-            default:
+		    break;
+                default:
                 Debug.Log("Fault in NPC1Movement");
                 break;
         }

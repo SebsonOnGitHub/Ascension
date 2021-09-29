@@ -21,8 +21,8 @@ public class NPC2Movement : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D other)
     {
-	PlayerMovement.toggleThinkable(false);
-	PlayerMovement.toggleMovable(false);
+        player.toggleThinkable(false);
+	player.toggleMovable(false);
 	speech_bubble.show(Dialogue);
         talking = true;
     }
@@ -30,8 +30,8 @@ public class NPC2Movement : MonoBehaviour
     {
 	if(!talking & UnfreezeNext)
 	{
-	    PlayerMovement.toggleThinkable(true);
-	    PlayerMovement.toggleMovable(true);
+	    player.toggleThinkable(true);
+	    player.toggleMovable(true);
 	    UnfreezeNext = false;
 	}
 	

@@ -5,16 +5,17 @@ using UnityEngine;
 using UnityEngine.Events;
 public class ThinkingController : MonoBehaviour
 {
-    private PlayerMovement player;
+
     public TypingManager Typingmanager;
     public bool thinkingState;
-    public bool showThought;
-
+    public bool currThinking;
+    private PlayerMovement player;
     private Animator anim;
 
     void Start()
     {
         thinkingState = false;
+        currThinking = false;
         anim = GetComponent<Animator>();
         player = GetComponentInParent<PlayerMovement>();
         anim.SetBool("thinking", false);
@@ -23,12 +24,11 @@ public class ThinkingController : MonoBehaviour
 
     void Update()
     {
-        transform.position = new Vector3(player.transform.position.x - 4.5f, player.transform.position.y + 3.7f, player.transform.position.z);
+        transform.position = new Vector3(player.transform.position.x - 4.5f, player.transform.position.y + 3.9f, player.transform.position.z);
 
-        if (Input.GetKeyDown(KeyCode.Return) & PlayerMovement.thinkable)
+        if (Input.GetKeyDown(KeyCode.Return) & player.thinkable & !currThinking)
         {
-            thinkingState = !thinkingState;
-            anim.SetBool("thinking", thinkingState);
+            anim.SetBool("thinking", !anim.GetBool("thinking"));
         }
 
     }
@@ -38,9 +38,14 @@ public class ThinkingController : MonoBehaviour
         return thinkingState;
     }
 
-    public void updateThought()
+    public void setThinkingState()
     {
-        showThought = !showThought;
+        thinkingState = !thinkingState;
+    }
+
+    public void setCurrThinking()
+    {
+        currThinking = !currThinking;
     }
     public void SetThought(string thought, string solution, UnityEvent solved ,UnityEvent notSolved)
     {
