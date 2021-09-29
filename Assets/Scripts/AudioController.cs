@@ -10,7 +10,7 @@ public class AudioController : MonoBehaviour
     public static bool walkingPlayer;
     public static bool walkingNPC1;
     public static bool Dialogue_sound;
-
+    public static bool Dog_bark;
     private float waitTimeCountdownBirds;
 
 
@@ -21,6 +21,7 @@ public class AudioController : MonoBehaviour
         walkingPlayer = false;
         walkingNPC1 = false;
 	Dialogue_sound = false;
+	Dog_bark = false;
     }
 
 
@@ -68,8 +69,18 @@ public class AudioController : MonoBehaviour
 		}
 		
 	    }
-        }
-        
+	    if(source.name.Equals("dog_bark"))
+	    {
+		if (Dog_bark &!source.isPlaying)
+		{
+		    source.Play();
+		}
+		/*
+		if(!Dog_bark & source.isPlaying)
+		{
+		    source.Stop();
+		    }*/
+	    }
+	}
     }
-
 }

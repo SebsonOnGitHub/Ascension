@@ -56,13 +56,16 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\AudioController.cs" />
+     <Compile Include="Assets\Scripts\CS2Trigger.cs" />
      <Compile Include="Assets\Scripts\CSTrigger.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
      <Compile Include="Assets\Scripts\CreditsRoll.cs" />
      <Compile Include="Assets\Scripts\CutSceneManager.cs" />
+     <Compile Include="Assets\Scripts\Dog_controller.cs" />
      <Compile Include="Assets\Scripts\MainMenuController.cs" />
      <Compile Include="Assets\Scripts\MaskController.cs" />
      <Compile Include="Assets\Scripts\NPC1Movement.cs" />
+     <Compile Include="Assets\Scripts\NPC2Movement.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\ThinkingController.cs" />
      <Compile Include="Assets\Scripts\TypingManager.cs" />

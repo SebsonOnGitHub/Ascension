@@ -20,7 +20,7 @@ public class TypingManager : MonoBehaviour
 
     void setpointer()
     {
-		string spaces = "";
+	string spaces = "";
 	for (int i = 0; i< sentence.currText.Length;i++)
 	{spaces +=" ";};
         pointerDisplay.text = spaces.Insert(sentence.pointerIndex,pointerSymbol);
@@ -30,13 +30,11 @@ public class TypingManager : MonoBehaviour
     
     void Start()
     {
-
+	sentence = sentence;
 	currDisplay.text = sentence.startText;
         sentence.pointerIndex = sentence.startText.Length;
-	
         setpointer();
- 
-    }
+     }
 
     void Update()
     {
@@ -80,7 +78,15 @@ public class TypingManager : MonoBehaviour
         string input = Input.inputString.ToUpper();
 
         if (input.Equals("") | !thinkingController.getThinkingState())
+	{
+	    currDisplay.text = sentence.currText;
+	    char[] ab = sentence.removedText.ToCharArray();
+	    Array.Sort(ab);
+	    removedDisplay.text = new string(ab);
+	    setpointer();
+	    
             return;
+	}
 
         char c = input[0];
         string curr = sentence.currText;
@@ -109,13 +115,22 @@ public class TypingManager : MonoBehaviour
         Array.Sort(a);
         removedDisplay.text = new string(a);
 	
-        string spaces = "";
-	for (int i = 0; i< sentence.currText.Length;i++)
-	{spaces +=" ";}
-	pointerDisplay.text = spaces.Insert(sentence.pointerIndex,pointerSymbol);
-	sentence.pointerText = pointerDisplay.text;
+	setpointer();
         
     }
+    
+    public void SetThought (string thought, string solution, UnityEvent solved ,UnityEvent notSolved)
+    {
+
+	sentence.startText = thought;
+	sentence.currText = thought;
+	sentence.removedText = "";
+	sentence.goalText = solution;
+        setpointer();
+	sentence.goalNotReached = notSolved;
+	sentence.goalReached=solved;
+	goalWasReached=false;
+	}
 }
 
 [System.Serializable]

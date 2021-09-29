@@ -51,7 +51,6 @@ public class NPC1Movement : MonoBehaviour
                 break;
             case 4: // walk away and reveal the hint.
 		speech_bubble.close();
-		//speech_bubble.
 		PlayerMovement.toggleThinkable(true);
 		anim.SetBool("run", true);
                 body.velocity = new Vector2(speed, body.velocity.y);

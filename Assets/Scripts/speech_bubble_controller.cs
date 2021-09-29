@@ -23,12 +23,12 @@ public class speech_bubble_controller : MonoBehaviour
     {
         gameObject.SetActive(true);
 	CurrentText = textarg;
-	Debug.Log(textarg);
 	StartCoroutine(DisplayText());
     }
     
     public void close()
     {
+	AudioController.Dialogue_sound = false;
 	gameObject.SetActive(false);
 	StopAllCoroutines();
     }

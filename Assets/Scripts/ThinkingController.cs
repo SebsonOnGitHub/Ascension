@@ -2,11 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class ThinkingController : MonoBehaviour
 {
     private PlayerMovement player;
-
+    public TypingManager Typingmanager;
     public bool thinkingState;
     public bool showThought;
 
@@ -41,5 +41,9 @@ public class ThinkingController : MonoBehaviour
     public void updateThought()
     {
         showThought = !showThought;
+    }
+    public void SetThought(string thought, string solution, UnityEvent solved ,UnityEvent notSolved)
+    {
+    	Typingmanager.SetThought(thought,solution,solved,notSolved);
     }
 }
