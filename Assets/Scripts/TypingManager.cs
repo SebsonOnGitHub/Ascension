@@ -21,21 +21,20 @@ public class TypingManager : MonoBehaviour
     void setpointer()
     {
 		string spaces = "";
-	for (int i = 0; i< sentence.currText.Length;i++)
-	{spaces +=" ";};
+	    for (int i = 0; i< sentence.currText.Length;i++)
+	        spaces +=" ";
+
         pointerDisplay.text = spaces.Insert(sentence.pointerIndex,pointerSymbol);
 	
-	sentence.pointerText = pointerDisplay.text;
+	    sentence.pointerText = pointerDisplay.text;
     }
     
     void Start()
     {
-
-	currDisplay.text = sentence.startText;
+	    currDisplay.text = sentence.startText;
         sentence.pointerIndex = sentence.startText.Length;
 	
         setpointer();
- 
     }
 
     void Update()
@@ -43,9 +42,9 @@ public class TypingManager : MonoBehaviour
         if(!goalWasReached)
             goalWasReached = sentence.isGoalReached(thinkingController);
 
-	pointerDisplay.gameObject.SetActive(thinkingController.showThought);
-        currDisplay.gameObject.SetActive(thinkingController.showThought);
-        removedDisplay.gameObject.SetActive(thinkingController.showThought);
+	    pointerDisplay.gameObject.SetActive(thinkingController.thinkingState);
+        currDisplay.gameObject.SetActive(thinkingController.thinkingState);
+        removedDisplay.gameObject.SetActive(thinkingController.thinkingState);
 	
 	
         timeInterval += Time.deltaTime;
@@ -63,8 +62,8 @@ public class TypingManager : MonoBehaviour
                 else if (Input.GetKey(KeyCode.RightArrow) & sentence.pointerIndex < sentence.currText.Length)
                     sentence.pointerIndex++;
             }
-	    setpointer();
-	}
+	        setpointer();
+	    }
 
         if (timeAnimation >= 0.4)
         {
@@ -104,17 +103,17 @@ public class TypingManager : MonoBehaviour
 	    
         }
         
-	currDisplay.text = sentence.currText;
+	    currDisplay.text = sentence.currText;
         char[] a = sentence.removedText.ToCharArray();
         Array.Sort(a);
         removedDisplay.text = new string(a);
 	
         string spaces = "";
-	for (int i = 0; i< sentence.currText.Length;i++)
-	{spaces +=" ";}
-	pointerDisplay.text = spaces.Insert(sentence.pointerIndex,pointerSymbol);
-	sentence.pointerText = pointerDisplay.text;
-        
+	    for (int i = 0; i< sentence.currText.Length;i++)
+	        spaces +=" ";
+	
+        pointerDisplay.text = spaces.Insert(sentence.pointerIndex,pointerSymbol);
+	    sentence.pointerText = pointerDisplay.text;  
     }
 }
 
@@ -135,7 +134,6 @@ public class Sentence
     {
         if (currText.Equals(goalText) & !thinkingController.getThinkingState())
         {
-            PlayerMovement.toggleMovable(true);
             goalReached.Invoke();
             return true;
         }
