@@ -22,15 +22,17 @@ public class TypingManager : MonoBehaviour
     {
         string spaces = "";
         for (int i = 0; i< sentence.currText.Length;i++)
-	        spaces +=" ";
+	    spaces +=" ";
         pointerDisplay.text = spaces.Insert(sentence.pointerIndex,pointerSymbol);
         sentence.pointerText = pointerDisplay.text;
     }
     
     void Start()
     {
-	    currDisplay.text = sentence.startText;
-	    sentence.pointerIndex = sentence.startText.Length;
+
+	
+	currDisplay.text = sentence.startText;
+	sentence.pointerIndex = sentence.startText.Length;
         setpointer();
     }
 
@@ -39,7 +41,7 @@ public class TypingManager : MonoBehaviour
         if(!goalWasReached)
             goalWasReached = sentence.isGoalReached(thinkingController);
 
-	    pointerDisplay.gameObject.SetActive(thinkingController.thinkingState);
+	pointerDisplay.gameObject.SetActive(thinkingController.thinkingState);
         currDisplay.gameObject.SetActive(thinkingController.thinkingState);
         removedDisplay.gameObject.SetActive(thinkingController.thinkingState);
 	
@@ -59,8 +61,8 @@ public class TypingManager : MonoBehaviour
                 else if (Input.GetKey(KeyCode.RightArrow) & sentence.pointerIndex < sentence.currText.Length)
                     sentence.pointerIndex++;
             }
-	        setpointer();
-	    }
+	    setpointer();
+	}
 
         if (timeAnimation >= 0.4)
         {
@@ -72,20 +74,24 @@ public class TypingManager : MonoBehaviour
                 pointerSymbol = "|";
 
         }
-
-        string input = Input.inputString.ToUpper();
-
-        if (input.Equals("") | !thinkingController.getThinkingState())
+	string input = Input.inputString.ToUpper();
+	bool at_start =(sentence.pointerIndex == 0);
+	bool at_end = (sentence.pointerIndex == sentence.currText.Length);
+        if (input.Equals("") | !thinkingController.getThinkingState() |
+	    input.Equals(" ") &
+	    (
+		(at_start || sentence.currText[sentence.pointerIndex-1] == ' ') |// can't put in beginning or before another space
+		(!at_end && sentence.currText[sentence.pointerIndex ] ==' ') // can't space after another space
+	    )
+	)
 	{
 	    currDisplay.text = sentence.currText;
 	    char[] ab = sentence.removedText.ToCharArray();
 	    Array.Sort(ab);
 	    removedDisplay.text = new string(ab);
 	    setpointer();
-	    
-            return;
+	    return;
 	}
-
         char c = input[0];
         string curr = sentence.currText;
         string removed = sentence.removedText;
@@ -108,24 +114,26 @@ public class TypingManager : MonoBehaviour
 	    
         }
         
-	    currDisplay.text = sentence.currText;
-        char[] a = sentence.removedText.ToCharArray();
+	currDisplay.text = sentence.currText;
+	char[] a = sentence.removedText.ToCharArray();
         Array.Sort(a);
         removedDisplay.text = new string(a);
-	    setpointer();
+	setpointer();
     }
     
     public void SetThought (string thought, string solution, UnityEvent solved ,UnityEvent notSolved)
     {
-	    sentence.startText = thought;
-	    sentence.currText = thought;
-	    sentence.removedText = "";
-	    sentence.goalText = solution;
+
+	sentence.startText = thought;
+	sentence.currText = thought;
+	sentence.removedText = "";
+	sentence.goalText = solution;
+	sentence.pointerIndex = sentence.startText.Length;
         setpointer();
-	    sentence.goalNotReached = notSolved;
-	    sentence.goalReached=solved;
-	    goalWasReached=false;
-	}
+	sentence.goalNotReached = notSolved;
+	sentence.goalReached=solved;
+	goalWasReached=false;
+    }
 }
 
 [System.Serializable]

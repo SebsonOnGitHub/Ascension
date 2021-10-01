@@ -36,11 +36,13 @@ public class PlayerMovement : MonoBehaviour
     {
 	//TODO: Remove legacy code.
 	AudioController.walkingPlayer = anim.GetBool("run");
+
         if (CSrunning >0)
 	{
 	    anim.SetBool("run", true);
 	    body.velocity = new Vector2(CSrunDirection * CSmoveSpeed, body.velocity.y);
 	    --CSrunning;
+	    
 	    return;
 	}
 	
@@ -60,10 +62,9 @@ public class PlayerMovement : MonoBehaviour
 	
 	else if (horizontalInput < -0.01f)
 	    direction = -1;
-	
+
 	playerSprite.flipX = direction == 1;
 	anim.SetBool("run", horizontalInput != 0);
-	
     }
     
     public static void CutSceneRun(float xoffset,float movespeed) // should not be static.
@@ -75,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
 	CSmoveSpeed = movespeed;
 	
 	CSrunning = Math.Abs((int) Mathf.Ceil( (float) (xoffset / movespeed )));
+
 
     }
 

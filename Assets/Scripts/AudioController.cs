@@ -12,6 +12,7 @@ public class AudioController : MonoBehaviour
     public static bool walkingNPC1;
     public static bool Dialogue_sound;
     public static bool Dog_bark;
+    public static bool Woosh;
     private float waitTimeCountdownBirds;
 
 
@@ -21,8 +22,14 @@ public class AudioController : MonoBehaviour
         waitTimeCountdownBirds = Random.Range(minWaitBetweenPlays, maxWaitBetweenPlays);
         walkingPlayer = false;
         walkingNPC1 = false;
+<<<<<<< HEAD
 	    Dialogue_sound = false;
 	    Dog_bark = false;
+=======
+	Dialogue_sound = false;
+	Dog_bark = false;
+	Woosh = false;
+>>>>>>> main
     }
 
 
@@ -58,6 +65,7 @@ public class AudioController : MonoBehaviour
                 else
                     waitTimeCountdownBirds -= Time.deltaTime;
             }
+<<<<<<< HEAD
 
 	        if(source.name.Equals("Dialogue_sound"))
 	        {
@@ -78,5 +86,38 @@ public class AudioController : MonoBehaviour
                     AudioController.Dog_bark = false;
                 }
         }
+=======
+	    if(source.name.Equals("Dialogue_sound"))
+	    {
+		if(Dialogue_sound &!source.isPlaying)
+		{
+		    source.Play();
+		}
+		if(!Dialogue_sound & source.isPlaying)
+		{
+		    source.Stop();
+		}
+		
+	    }
+	    if(source.name.Equals("dog_bark"))
+	    {
+		if (Dog_bark &!source.isPlaying)
+		{
+		    source.Play();
+		    Dog_bark = false;
+		}
+		
+	    }
+	    if(source.name.Equals("Woosh"))
+	    {
+		if (Woosh &!source.isPlaying)
+		{
+		    source.Play();
+		    Woosh = false;
+		}
+		
+	    }
+	}
+>>>>>>> main
     }
 }

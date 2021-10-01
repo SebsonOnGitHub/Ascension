@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Sounds/dog_bark.mp3.meta
 guid: 2eb848546e9a90d4c868c53e7951d524
+=======
+guid: bc18a2a49e70f0ffdb86962f3fd39e1f
+>>>>>>> main:Assets/Sounds/Dog_bark.wav.meta
 AudioImporter:
   externalObjects: {}
   serializedVersion: 6

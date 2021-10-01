@@ -20,6 +20,7 @@ public class Dog_controller : MonoBehaviour
 	    player.toggleThinkable(true);
 	    player.toggleMovable(true);
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         anim.SetTrigger("Bark");
@@ -30,6 +31,8 @@ public class Dog_controller : MonoBehaviour
     public void Become_nice()
     {
         Destroy(boxCollider);
-	    anim.SetTrigger("Transition");
+	anim.SetTrigger("Transition");
+	AudioController.Woosh=true;
+
     }
 }
