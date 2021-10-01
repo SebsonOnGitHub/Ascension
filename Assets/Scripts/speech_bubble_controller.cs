@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class speech_bubble_controller : MonoBehaviour
 {
-    public Text text;
+    //public Text text;
+    public TMP_Text text;
     private string CurrentText;
-    
+    const string kAlphaCode = "<color=#00000000>";
+    const float kMaxTextTime = 0.5f;
+    public int textSpeed=5;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,11 +39,17 @@ public class speech_bubble_controller : MonoBehaviour
     {
 	AudioController.Dialogue_sound = true;
 
+	string originalText = CurrentText;
+	string displayedText = "";
+	int alphaIndex = 0;
 	text.text = "";
 	foreach(char c in CurrentText.ToCharArray())
 	{
-	    text.text +=c;
-	    yield return new WaitForSecondsRealtime(0.1f);
+	    alphaIndex++;
+	    text.text = originalText;
+	    displayedText = text.text.Insert(alphaIndex,kAlphaCode);
+	    text.text=displayedText;
+	    yield return new WaitForSecondsRealtime(kMaxTextTime/textSpeed);
 	}
 	AudioController.Dialogue_sound = false;
     }

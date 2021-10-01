@@ -5,7 +5,7 @@ using UnityEngine.Events;
 public class NPC2Movement : MonoBehaviour
 {
     public PlayerMovement player;
-    public speech_bubble_controller speech_bubble; 
+    public speech_bubble_controller speech_bubble;
     public string Dialogue;
     private bool talking, UnfreezeNext;
     public UnityEvent goalReached;

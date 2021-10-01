@@ -5,6 +5,7 @@ using UnityEngine;
 public class Dog_controller : MonoBehaviour
 {
     // Start is called before the first frame update
+    
     private  Animator anim;
     private BoxCollider2D boxCollider;
     public PlayerMovement player;
@@ -22,22 +23,14 @@ public class Dog_controller : MonoBehaviour
     
     public void stop_bark()
     {
-	anim.SetTrigger("Stop_bark");
-	AudioController.Dog_bark=false;
+	PlayerMovement.CutSceneRun(-200.0f,5.1f);
 	
-        PlayerMovement.CutSceneRun(-200.0f,5.1f);
+
 	player.toggleThinkable(true);
 	player.toggleMovable(true);
 	
     }
-    /*
-    public void Stop_Transition()
-    {
-	//remove block of doggy
-	anim.SetTrigger("Nice");
-        
-    }
-    */
+    
     private void OnTriggerEnter2D(Collider2D other)
     {
 	if (nice)
@@ -51,9 +44,13 @@ public class Dog_controller : MonoBehaviour
     }
     public void Become_nice()
     {
-        Destroy(boxCollider);
-	anim.SetTrigger("Transition");
-
+	if(!nice)
+	{
+	    nice = true;
+	    Destroy(boxCollider);
+	    AudioController.Woosh=true;
+	    anim.SetTrigger("Transition");
+	}
     }
     
     // Update is called once per frame

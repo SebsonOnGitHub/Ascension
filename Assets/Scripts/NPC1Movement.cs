@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class NPC1Movement : MonoBehaviour
 {
     public float speed;
-
     public speech_bubble_controller speech_bubble;
     public string Dialogue;
     private bool once;
@@ -69,12 +68,12 @@ public class NPC1Movement : MonoBehaviour
                 MaskController.follow = true;
                 break;
 	        case 5:  //disappear and kill self.
-		        MaskController.follow = false;
-                AudioController.walkingNPC1=false;
-                Destroy(gameObject);
+		    MaskController.follow = false;
+		    AudioController.walkingNPC1=false;
+		    Destroy(gameObject);
 		    break;
                 default:
-                Debug.Log("Fault in NPC1Movement");
+		    Debug.Log("Fault in NPC1Movement");
                 break;
         }
 

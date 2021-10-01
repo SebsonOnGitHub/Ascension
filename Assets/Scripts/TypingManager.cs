@@ -30,7 +30,7 @@ public class TypingManager : MonoBehaviour
     
     void Start()
     {
-
+	
 	currDisplay.text = sentence.startText;
 	sentence.pointerIndex = sentence.startText.Length;
         setpointer();
@@ -78,20 +78,24 @@ public class TypingManager : MonoBehaviour
                 pointerSymbol = "|";
 
         }
-
-        string input = Input.inputString.ToUpper();
-
-        if (input.Equals("") | !thinkingController.getThinkingState())
+	string input = Input.inputString.ToUpper();
+	bool at_start =(sentence.pointerIndex == 0);
+	bool at_end = (sentence.pointerIndex == sentence.currText.Length);
+        if (input.Equals("") | !thinkingController.getThinkingState() |
+	    input.Equals(" ") &
+	    (
+		(at_start || sentence.currText[sentence.pointerIndex-1] == ' ') |// can't put in beginning or before another space
+		(!at_end && sentence.currText[sentence.pointerIndex ] ==' ') // can't space after another space
+	    )
+	)
 	{
 	    currDisplay.text = sentence.currText;
 	    char[] ab = sentence.removedText.ToCharArray();
 	    Array.Sort(ab);
 	    removedDisplay.text = new string(ab);
 	    setpointer();
-	    
-            return;
+	    return;
 	}
-
         char c = input[0];
         string curr = sentence.currText;
         string removed = sentence.removedText;
@@ -114,8 +118,8 @@ public class TypingManager : MonoBehaviour
 	    
         }
         
-	    currDisplay.text = sentence.currText;
-        char[] a = sentence.removedText.ToCharArray();
+	currDisplay.text = sentence.currText;
+	char[] a = sentence.removedText.ToCharArray();
         Array.Sort(a);
         removedDisplay.text = new string(a);
 	setpointer();
@@ -123,16 +127,16 @@ public class TypingManager : MonoBehaviour
     
     public void SetThought (string thought, string solution, UnityEvent solved ,UnityEvent notSolved)
     {
-
 	sentence.startText = thought;
 	sentence.currText = thought;
 	sentence.removedText = "";
 	sentence.goalText = solution;
+	sentence.pointerIndex = sentence.startText.Length;
         setpointer();
 	sentence.goalNotReached = notSolved;
 	sentence.goalReached=solved;
 	goalWasReached=false;
-	}
+    }
 }
 
 [System.Serializable]
