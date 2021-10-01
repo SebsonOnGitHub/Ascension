@@ -10,7 +10,6 @@ public class VolumeControl : MonoBehaviour
     public UnityEngine.UI.Slider slider;
     private float multiplier = 30f;
 
-    // Start is called before the first frame update
     void Awake()
     {
         slider.onValueChanged.AddListener(HandleSliderValueChanged);

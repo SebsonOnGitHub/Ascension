@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioController : MonoBehaviour
 {
@@ -20,8 +21,8 @@ public class AudioController : MonoBehaviour
         waitTimeCountdownBirds = Random.Range(minWaitBetweenPlays, maxWaitBetweenPlays);
         walkingPlayer = false;
         walkingNPC1 = false;
-	Dialogue_sound = false;
-	Dog_bark = false;
+	    Dialogue_sound = false;
+	    Dog_bark = false;
     }
 
 
@@ -57,30 +58,25 @@ public class AudioController : MonoBehaviour
                 else
                     waitTimeCountdownBirds -= Time.deltaTime;
             }
-	    if(source.name.Equals("Dialogue_sound"))
-	    {
-		if(Dialogue_sound &!source.isPlaying)
-		{
-		    source.Play();
-		}
-		if(!Dialogue_sound & source.isPlaying)
-		{
-		    source.Stop();
-		}
-		
-	    }
-	    if(source.name.Equals("dog_bark"))
-	    {
-		if (Dog_bark &!source.isPlaying)
-		{
-		    source.Play();
-		}
-		/*
-		if(!Dog_bark & source.isPlaying)
-		{
-		    source.Stop();
-		    }*/
-	    }
-	}
+
+	        if(source.name.Equals("Dialogue_sound"))
+	        {
+                if (Dialogue_sound & source.isPlaying)
+                    source.Stop();
+
+                if (Dialogue_sound &!source.isPlaying)
+                {
+                    source.Play();
+                    Dialogue_sound = false;
+                }
+	        }
+
+	        if(source.name.Equals("dog_bark"))
+		        if (Dog_bark &!source.isPlaying)
+                {
+                    source.Play();
+                    AudioController.Dog_bark = false;
+                }
+        }
     }
 }

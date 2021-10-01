@@ -28,7 +28,7 @@ public class NPC1Movement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         CutSceneManager.IncreaseCutScene();
-	once = true;
+	    once = true;
     }
 
     void Update()

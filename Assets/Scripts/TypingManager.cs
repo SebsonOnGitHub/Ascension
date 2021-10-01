@@ -20,25 +20,19 @@ public class TypingManager : MonoBehaviour
 
     void setpointer()
     {
-
-	string spaces = "";
-	for (int i = 0; i< sentence.currText.Length;i++)
-	    spaces +=" ";
-	pointerDisplay.text = spaces.Insert(sentence.pointerIndex,pointerSymbol);
-	sentence.pointerText = pointerDisplay.text;
+        string spaces = "";
+        for (int i = 0; i< sentence.currText.Length;i++)
+	        spaces +=" ";
+        pointerDisplay.text = spaces.Insert(sentence.pointerIndex,pointerSymbol);
+        sentence.pointerText = pointerDisplay.text;
     }
     
     void Start()
     {
-
-	currDisplay.text = sentence.startText;
-	sentence.pointerIndex = sentence.startText.Length;
+	    currDisplay.text = sentence.startText;
+	    sentence.pointerIndex = sentence.startText.Length;
         setpointer();
-
     }
-
-
-
 
     void Update()
     {
@@ -118,20 +112,19 @@ public class TypingManager : MonoBehaviour
         char[] a = sentence.removedText.ToCharArray();
         Array.Sort(a);
         removedDisplay.text = new string(a);
-	setpointer();
+	    setpointer();
     }
     
     public void SetThought (string thought, string solution, UnityEvent solved ,UnityEvent notSolved)
     {
-
-	sentence.startText = thought;
-	sentence.currText = thought;
-	sentence.removedText = "";
-	sentence.goalText = solution;
+	    sentence.startText = thought;
+	    sentence.currText = thought;
+	    sentence.removedText = "";
+	    sentence.goalText = solution;
         setpointer();
-	sentence.goalNotReached = notSolved;
-	sentence.goalReached=solved;
-	goalWasReached=false;
+	    sentence.goalNotReached = notSolved;
+	    sentence.goalReached=solved;
+	    goalWasReached=false;
 	}
 }
 

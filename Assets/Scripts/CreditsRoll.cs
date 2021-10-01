@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CreditsRoll : MonoBehaviour
 {
     public TextAsset asset;
+    public float speed;
     private Text credits;
     private Vector3 originalPosition;
 
@@ -18,7 +19,7 @@ public class CreditsRoll : MonoBehaviour
 
     private void FixedUpdate()
     {
-        credits.transform.position = new Vector3(credits.transform.position.x, credits.transform.position.y + 0.015f, credits.transform.position.z);
+        credits.transform.position = new Vector3(credits.transform.position.x, credits.transform.position.y + speed, credits.transform.position.z);
     }
 
     private void OnEnable()

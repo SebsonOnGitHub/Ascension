@@ -10,41 +10,38 @@ public class NPC2Movement : MonoBehaviour
     private bool talking, UnfreezeNext;
     public UnityEvent goalReached;
     public UnityEvent goalNotReached;
-    // Start is called before the first frame update
+
     void Start()
     {
-	
         talking =false;
-	UnfreezeNext = false;
+		UnfreezeNext = false;
     }
 
-    // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D other)
     {
         player.toggleThinkable(false);
-	player.toggleMovable(false);
-	speech_bubble.show(Dialogue);
+		player.toggleMovable(false);
+		speech_bubble.show(Dialogue);
         talking = true;
+        Destroy(GetComponent<BoxCollider2D>());
     }
+
     void Update()
     {
-	if(!talking & UnfreezeNext)
-	{
-	    player.toggleThinkable(true);
-	    player.toggleMovable(true);
-	    UnfreezeNext = false;
-	}
+		if(!talking & UnfreezeNext)
+		{
+			player.toggleThinkable(true);
+			player.toggleMovable(true);
+			UnfreezeNext = false;
+		}
 	
-	if(talking & Input.GetKeyDown(KeyCode.Return))
-	{
-	    speech_bubble.close();
-	    talking = false;
-	    UnfreezeNext = true;
-	    
+		if(talking & Input.GetKeyDown(KeyCode.Return))
+		{
+			speech_bubble.close();
+			talking = false;
+			UnfreezeNext = true;
 
-	    //aquire new thought here!!
-	    player.SetThought("there is a dog","there is a god",goalReached,goalNotReached);
-	    
-	}
+            player.SetThought("there is a dog","there is a god",goalReached,goalNotReached);
+        }
     }
 }

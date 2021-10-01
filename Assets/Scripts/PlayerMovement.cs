@@ -89,7 +89,6 @@ public class PlayerMovement : MonoBehaviour
     }
     public void SetThought(string thought, string solution,  UnityEvent solved ,UnityEvent notSolved)
     {
-	Debug.Log("SetThought Playermovement");
     	thinkingController.SetThought(thought.ToUpper(),solution.ToUpper(),solved,notSolved);
     }
 }
