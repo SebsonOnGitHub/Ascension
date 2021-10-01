@@ -22,17 +22,13 @@ public class AudioController : MonoBehaviour
         waitTimeCountdownBirds = Random.Range(minWaitBetweenPlays, maxWaitBetweenPlays);
         walkingPlayer = false;
         walkingNPC1 = false;
-<<<<<<< HEAD
-	    Dialogue_sound = false;
-	    Dog_bark = false;
-=======
 	Dialogue_sound = false;
 	Dog_bark = false;
 	Woosh = false;
->>>>>>> main
+	
     }
-
-
+    
+    
     void Update()
     {
         foreach (AudioSource source in audioSources)
@@ -41,20 +37,20 @@ public class AudioController : MonoBehaviour
             {
                 if (walkingPlayer & !source.isPlaying)
                     source.Play();
-
+		
                 if (!walkingPlayer & source.isPlaying)
                     source.Stop();
             }
-
+	    
             if (source.name.Equals("WalkingNPC1"))
             {
                 if (walkingNPC1 & !source.isPlaying)
                     source.Play();
-
+		
                 if (!walkingNPC1 & source.isPlaying)
                     source.Stop();
             }
-
+	    
             if (source.name.Equals("BirdAudio") & !source.isPlaying)
             {
                 if (waitTimeCountdownBirds < 0f)
@@ -65,40 +61,19 @@ public class AudioController : MonoBehaviour
                 else
                     waitTimeCountdownBirds -= Time.deltaTime;
             }
-<<<<<<< HEAD
 
-	        if(source.name.Equals("Dialogue_sound"))
-	        {
+	    if(source.name.Equals("Dialogue_sound"))
+	    {
                 if (Dialogue_sound & source.isPlaying)
                     source.Stop();
-
+		
                 if (Dialogue_sound &!source.isPlaying)
                 {
                     source.Play();
                     Dialogue_sound = false;
-                }
-	        }
-
-	        if(source.name.Equals("dog_bark"))
-		        if (Dog_bark &!source.isPlaying)
-                {
-                    source.Play();
-                    AudioController.Dog_bark = false;
-                }
-        }
-=======
-	    if(source.name.Equals("Dialogue_sound"))
-	    {
-		if(Dialogue_sound &!source.isPlaying)
-		{
-		    source.Play();
 		}
-		if(!Dialogue_sound & source.isPlaying)
-		{
-		    source.Stop();
-		}
-		
 	    }
+	    
 	    if(source.name.Equals("dog_bark"))
 	    {
 		if (Dog_bark &!source.isPlaying)
@@ -118,6 +93,5 @@ public class AudioController : MonoBehaviour
 		
 	    }
 	}
->>>>>>> main
     }
 }
