@@ -26,7 +26,7 @@ public class Dog_controller : MonoBehaviour
         anim.SetTrigger("Bark");
         player.toggleThinkable(false);
         player.toggleMovable(false);
-	    AudioController.Dog_bark=true;
+	AudioController.Dog_bark=true;
     }
     public void Become_nice()
     {
