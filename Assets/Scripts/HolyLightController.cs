@@ -13,7 +13,7 @@ public class HolyLightController : MonoBehaviour
         move = true;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (move & transform.position.y > stop)
             transform.position = new Vector3(transform.position.x, transform.position.y - speed, transform.position.z);

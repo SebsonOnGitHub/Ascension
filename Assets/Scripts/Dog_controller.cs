@@ -7,7 +7,7 @@ public class Dog_controller : MonoBehaviour
     private  Animator anim;
     private BoxCollider2D boxCollider;
     public PlayerMovement player;
-    public HolyLightController light;
+    public HolyLightController lightMask;
 
     void Start()
     {
@@ -17,7 +17,7 @@ public class Dog_controller : MonoBehaviour
     
     public void stop_bark()
     {
-	    PlayerMovement.CutSceneRun(-600.0f,5.1f);
+	    PlayerMovement.CutSceneRun(-100.0f,5.1f);
 	    player.toggleThinkable(true);
 	    player.toggleMovable(true);
     }
@@ -27,13 +27,13 @@ public class Dog_controller : MonoBehaviour
         anim.SetTrigger("Bark");
         player.toggleThinkable(false);
         player.toggleMovable(false);
-	AudioController.Dog_bark=true;
+	    AudioController.Dog_bark=true;
     }
     public void Become_nice()
     {
         Destroy(boxCollider);
 	    anim.SetTrigger("Transition");
 	    AudioController.Transform=true;
-        light.gameObject.SetActive(true);
+        lightMask.gameObject.SetActive(true);
     }
 }

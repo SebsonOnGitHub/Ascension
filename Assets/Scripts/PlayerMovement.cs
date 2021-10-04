@@ -28,23 +28,23 @@ public class PlayerMovement : MonoBehaviour
         playerSprite = GetComponentInChildren<SpriteRenderer>();
         movable = false;
         thinkable = false;
-	CSrunning = 0;
+	    CSrunning = 0;
         CSrunDirection = 0;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-	//TODO: Remove legacy code.
-	AudioController.walkingPlayer = anim.GetBool("run");
+	    //TODO: Remove legacy code.
+	    AudioController.walkingPlayer = anim.GetBool("run");
 
-        if (CSrunning >0)
-	{
-	    anim.SetBool("run", true);
-	    body.velocity = new Vector2(CSrunDirection * CSmoveSpeed, body.velocity.y);
-	    --CSrunning;
+        if (CSrunning > 0)
+	    {
+	        anim.SetBool("run", true);
+	        body.velocity = new Vector2(CSrunDirection * CSmoveSpeed, body.velocity.y);
+	        --CSrunning;
 	    
-	    return;
-	}
+	        return;
+	    }
 	
 	if (thinkingController.getThinkingState())
 	{
