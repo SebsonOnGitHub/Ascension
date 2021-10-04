@@ -53,7 +53,7 @@ public class NPC1Movement : MonoBehaviour
 		    speech_bubble.show (Dialogue);
 		    once = false;
 		}
-		if(Input.GetKeyDown(KeyCode.Return) )
+		if(Input.GetKeyDown(KeyCode.Space) )
 		{
 		    CutSceneManager.IncreaseCutScene();
 		}

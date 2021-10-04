@@ -11,6 +11,8 @@ public class ThinkingController : MonoBehaviour
     public bool currThinking;
     private PlayerMovement player;
     private Animator anim;
+    public float offsetX = -2f;
+    public float offsetY = 2.4f;
 
     void Start()
     {
@@ -24,7 +26,7 @@ public class ThinkingController : MonoBehaviour
 
     void Update()
     {
-        transform.position = new Vector3(player.transform.position.x - 4.5f, player.transform.position.y + 3.9f, player.transform.position.z);
+        transform.position = new Vector3(player.transform.position.x + offsetX, player.transform.position.y + offsetY, player.transform.position.z);
 
         if (Input.GetKeyDown(KeyCode.Return) & player.thinkable & !currThinking)
             anim.SetBool("thinking", !anim.GetBool("thinking"));

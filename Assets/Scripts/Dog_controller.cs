@@ -7,6 +7,7 @@ public class Dog_controller : MonoBehaviour
     private  Animator anim;
     private BoxCollider2D boxCollider;
     public PlayerMovement player;
+    public HolyLightController light;
 
     void Start()
     {
@@ -31,8 +32,8 @@ public class Dog_controller : MonoBehaviour
     public void Become_nice()
     {
         Destroy(boxCollider);
-	anim.SetTrigger("Transition");
-	AudioController.Woosh=true;
-
+	    anim.SetTrigger("Transition");
+	    AudioController.Transform=true;
+        light.gameObject.SetActive(true);
     }
 }
