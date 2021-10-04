@@ -35,7 +35,7 @@ public class NPC2Movement : MonoBehaviour
 			UnfreezeNext = false;
 		}
 	
-		if(talking & Input.GetKeyDown(KeyCode.Return))
+		if(talking & Input.GetKeyDown(KeyCode.Space))
 		{
 			speech_bubble.close();
 			talking = false;

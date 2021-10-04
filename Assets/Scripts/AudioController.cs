@@ -8,11 +8,12 @@ public class AudioController : MonoBehaviour
     public AudioSource[] audioSources;
     public float minWaitBetweenPlays;
     public float maxWaitBetweenPlays;
+    public static bool birdSong;
     public static bool walkingPlayer;
     public static bool walkingNPC1;
     public static bool Dialogue_sound;
     public static bool Dog_bark;
-    public static bool Woosh;
+    public static bool Transform;
     private float waitTimeCountdownBirds;
 
 
@@ -22,10 +23,10 @@ public class AudioController : MonoBehaviour
         waitTimeCountdownBirds = Random.Range(minWaitBetweenPlays, maxWaitBetweenPlays);
         walkingPlayer = false;
         walkingNPC1 = false;
-	Dialogue_sound = false;
-	Dog_bark = false;
-	Woosh = false;
-	
+	    Dialogue_sound = false;
+	    Dog_bark = false;
+        Transform = false;
+        birdSong = true;
     }
     
     
@@ -51,7 +52,7 @@ public class AudioController : MonoBehaviour
                     source.Stop();
             }
 	    
-            if (source.name.Equals("BirdAudio") & !source.isPlaying)
+            if (birdSong & source.name.Equals("BirdAudio") & !source.isPlaying)
             {
                 if (waitTimeCountdownBirds < 0f)
                 {
@@ -83,12 +84,12 @@ public class AudioController : MonoBehaviour
 		}
 		
 	    }
-	    if(source.name.Equals("Woosh"))
+	    if(source.name.Equals("Transform"))
 	    {
-		if (Woosh &!source.isPlaying)
+		if (Transform &!source.isPlaying)
 		{
 		    source.Play();
-		    Woosh = false;
+            Transform = false;
 		}
 		
 	    }
