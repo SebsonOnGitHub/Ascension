@@ -15,12 +15,13 @@ public class speech_bubble_controller : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-
-    public void show(string textarg)
+    public void show(string textarg , int speed=-1)
     {
+	if (speed == -1)
+	    speed = textSpeed;
         gameObject.SetActive(true);
 	CurrentText = textarg;
-	StartCoroutine(DisplayText());
+	StartCoroutine(DisplayText(speed));
     }
     
     public void close()
@@ -29,7 +30,7 @@ public class speech_bubble_controller : MonoBehaviour
 	StopAllCoroutines();
     }
 
-    private IEnumerator DisplayText()
+    private IEnumerator DisplayText(int speed)
     {
 	string originalText = CurrentText;
 	string displayedText = "";
@@ -43,8 +44,9 @@ public class speech_bubble_controller : MonoBehaviour
                 AudioController.Dialogue_sound = true;
 	    displayedText = text.text.Insert(alphaIndex,kAlphaCode);
 	    text.text=displayedText;
-	    yield return new WaitForSecondsRealtime(kMaxTextTime/textSpeed);
+	    yield return new WaitForSecondsRealtime(kMaxTextTime/speed);
 	}
 	AudioController.Dialogue_sound = false;
     }
+    
 }

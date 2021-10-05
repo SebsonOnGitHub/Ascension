@@ -76,10 +76,12 @@ public class PlayerMovement : MonoBehaviour
 	CSmoveSpeed = movespeed;
 	
 	CSrunning = Math.Abs((int) Mathf.Ceil( (float) (xoffset / movespeed )));
-
-
     }
-
+    
+    public bool isThinking()
+    {
+	return thinkingController.getThinkingState();
+    }
     public void toggleMovable(bool canMove)
     {
         movable = canMove;

@@ -29,6 +29,6 @@ public class Dialogue_box_controller : MonoBehaviour
     public void close()
     {
 	speech_bubble.close();
-	this_dialogue_box.enabled = false; // enable the renderer
+	this_dialogue_box.enabled = false; // disable the renderer
     }
 }
