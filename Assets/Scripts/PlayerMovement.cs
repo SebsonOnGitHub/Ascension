@@ -36,7 +36,6 @@ public class PlayerMovement : MonoBehaviour
     {
 	    //TODO: Remove legacy code.
 	    AudioController.walkingPlayer = anim.GetBool("run");
-
         if (CSrunning > 0)
 	    {
 	        anim.SetBool("run", true);
@@ -77,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
 	
 	CSrunning = Math.Abs((int) Mathf.Ceil( (float) (xoffset / movespeed )));
     }
+
     
     public bool isThinking()
     {

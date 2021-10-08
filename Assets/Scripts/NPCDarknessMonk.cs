@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-public class NPCSebastosMovement : MonoBehaviour
+public class NPCDarknessMonk : MonoBehaviour
 {
     public PlayerMovement player;
     public speech_bubble_controller speech_bubble;
@@ -24,17 +24,19 @@ public class NPCSebastosMovement : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D other)
     {
-	if (other.name == "Player") {
+	if (other.name == "Halo") {
 	    playerInColBox = false;
 	}
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-	if (other.name == "Player" )
+	if (other.name == "Halo" )
 	{
 	    playerInColBox = true;
 	    if(firstTalk)
 	    {
+		player.SetThought("solution is bajs","bajs",goalReached,goalNotReached);
+
 		player.toggleThinkable(false);
 		player.toggleMovable(false);
 		float offset = transform.position.x-player.transform.position.x;
@@ -55,7 +57,7 @@ public class NPCSebastosMovement : MonoBehaviour
 		{
 		    if (firstTalk)
 		    {
-			player.SetThought("solve with word:monk","monk",goalReached,goalNotReached);
+			player.SetThought("skriv bajs","bajs",goalReached,goalNotReached);
 			firstTalk = false;
 			Destroy(GetComponent<BoxCollider2D>());
 		    }
@@ -66,12 +68,13 @@ public class NPCSebastosMovement : MonoBehaviour
 		}
 		else if(playerInColBox)
 		{
+		    
 		    if(player.transform.position.x > transform.position.x)
 		    {
-			sprite.flipX=true;
+			sprite.flipX=false;
 		    }else
 		    {
-			sprite.flipX=false;
+			sprite.flipX=true;
 		    }
 		    float offset = transform.position.x-player.transform.position.x;
 		    player.toggleThinkable(false);
@@ -84,5 +87,5 @@ public class NPCSebastosMovement : MonoBehaviour
 	if (Input.GetKeyUp(prevKey))
 	    prevKey= KeyCode.None;
     }
- 
 }
+ 

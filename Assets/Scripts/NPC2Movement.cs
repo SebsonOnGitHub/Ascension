@@ -37,7 +37,8 @@ public class NPC2Movement : MonoBehaviour
 	    {
 		player.toggleThinkable(false);
 		player.toggleMovable(false);
-		speech_bubble.show(Dialogue);
+		float offset = transform.position.x-player.transform.position.x;
+		speech_bubble.show(Dialogue,-1,offset);
 		talking = true;
 	    }
 	}
@@ -50,9 +51,9 @@ public class NPC2Movement : MonoBehaviour
 	    if(Input.GetKey(KeyCode.Space) && !player.isThinking())
 	    {
 		prevKey = KeyCode.Space;
-		if(talking)
+		if(talking) // player entered space and now we close dialogue box
 		{
-		    if (firstTalk)
+		    if (firstTalk) 
 		    {
 			player.SetThought("there is a dog","there is a god",goalReached,goalNotReached);
 			firstTalk = false;
@@ -63,8 +64,9 @@ public class NPC2Movement : MonoBehaviour
 		    player.toggleThinkable(true);
 		    player.toggleMovable(true);
 		}
-		else if(playerInColBox)
+		else if(playerInColBox) // player pressed space and now we show dialogue box
 		{
+		    
 		    if(player.transform.position.x > transform.position.x)
 		    {
 			sprite.flipX=true;
@@ -74,7 +76,8 @@ public class NPC2Movement : MonoBehaviour
 		    }
 		    player.toggleThinkable(false);
 		    player.toggleMovable(false);
-		    speech_bubble.show(Dialogue);
+		    float offset = transform.position.x-player.transform.position.x;
+		    speech_bubble.show(Dialogue,-1,offset);
 		    talking = true;
 		}
 	    }

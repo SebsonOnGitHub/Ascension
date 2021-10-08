@@ -9,9 +9,9 @@ public class NPCJacobMovement : MonoBehaviour
     public speech_bubble_controller speech_bubble;
     public string Dialogue;
     private bool talking,playerInColBox;
-    public UnityEvent goalReached;
-    public UnityEvent goalNotReached;
+    public NPCJacobThoughtController bubble;
     private KeyCode prevKey;
+    
 
     void Start()
     {
@@ -45,7 +45,6 @@ public class NPCJacobMovement : MonoBehaviour
 		prevKey = KeyCode.Space;
 		if(talking)
 		{
-		    player.SetThought("Punkt slut","nut slut",goalReached,goalNotReached);
 		    speech_bubble.close();
 		    talking = false;
 		    player.toggleThinkable(true);
@@ -53,9 +52,10 @@ public class NPCJacobMovement : MonoBehaviour
 		}
 		else if(playerInColBox)
 		{
+		    float offset = transform.position.x-player.transform.position.x;
 		    player.toggleThinkable(false);
 		    player.toggleMovable(false);
-		    speech_bubble.show(Dialogue,1); //show(Dialogue);
+		    speech_bubble.show(Dialogue,1,offset); //show(Dialogue);
 		    talking = true;
 		}
 	    }
