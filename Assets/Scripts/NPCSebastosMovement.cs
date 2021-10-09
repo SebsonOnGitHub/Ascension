@@ -24,9 +24,9 @@ public class NPCSebastosMovement : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D other)
     {
-	if (other.name == "Player") {
-	    playerInColBox = false;
-	}
+		if (other.name == "Player") {
+			playerInColBox = false;
+		}
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -55,7 +55,7 @@ public class NPCSebastosMovement : MonoBehaviour
 		{
 		    if (firstTalk)
 		    {
-			player.SetThought("solve with word:monk","monk",goalReached,goalNotReached);
+			player.SetThought("What's the deal with mute monks?", "What's the deal with mute monks", goalReached,goalNotReached);
 			firstTalk = false;
 			Destroy(GetComponent<BoxCollider2D>());
 		    }
