@@ -9,7 +9,7 @@ public class NPCJacobMovement : MonoBehaviour
     public speech_bubble_controller speech_bubble;
     public string Dialogue;
     private bool talking,playerInColBox;
-    public NPCJacobThoughtController bubble;
+    public NPCThoughtBubbleController bubble;
     private KeyCode prevKey;
     
 

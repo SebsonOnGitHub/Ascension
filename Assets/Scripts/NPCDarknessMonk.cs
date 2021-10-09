@@ -7,7 +7,7 @@ public class NPCDarknessMonk : MonoBehaviour
     public PlayerMovement player;
     public speech_bubble_controller speech_bubble;
     public string Dialogue;
-    private bool talking, UnfreezeNext,firstTalk,playerInColBox;
+    private bool talking, firstTalk,playerInColBox;
     public UnityEvent goalReached;
     public UnityEvent goalNotReached;
     private KeyCode prevKey;
@@ -16,7 +16,6 @@ public class NPCDarknessMonk : MonoBehaviour
     {
 	sprite = GetComponent<SpriteRenderer>();
         talking =false;
-	UnfreezeNext = false;
 	firstTalk = true;
 	playerInColBox = false;
 	prevKey = KeyCode.None;
@@ -24,9 +23,9 @@ public class NPCDarknessMonk : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D other)
     {
-	if (other.name == "Halo") {
-	    playerInColBox = false;
-	}
+		if (other.name == "Halo") {
+			playerInColBox = false;
+		}
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -35,12 +34,12 @@ public class NPCDarknessMonk : MonoBehaviour
 	    playerInColBox = true;
 	    if(firstTalk)
 	    {
-		player.SetThought("solution is bajs","bajs",goalReached,goalNotReached);
 
 		player.toggleThinkable(false);
 		player.toggleMovable(false);
 		float offset = transform.position.x-player.transform.position.x;
 		speech_bubble.show (Dialogue,-1,offset);
+
 		talking = true;
 	    }
 	}
@@ -56,10 +55,11 @@ public class NPCDarknessMonk : MonoBehaviour
 		if(talking)
 		{
 		    if (firstTalk)
-		    {
-			player.SetThought("skriv bajs","bajs",goalReached,goalNotReached);
-			firstTalk = false;
-			Destroy(GetComponent<BoxCollider2D>());
+			{
+				player.SetThought("a holy being is human", "being a human is holy", goalReached, goalNotReached);
+				ThoughtSizeController.setFontSize(30);
+				firstTalk = false;
+				Destroy(GetComponent<BoxCollider2D>());
 		    }
 		    speech_bubble.close();
 		    talking = false;

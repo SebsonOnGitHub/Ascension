@@ -17,23 +17,24 @@ public class NPCThoughtBubbleController : MonoBehaviour
     public PlayerMovement player;
     public NPCJacobMovement jacob;
     private RectTransform rt;
-    void Start()
+    void Awake()
     {
-	rt = GetComponent<RectTransform>();
+	    rt = GetComponent<RectTransform>();
         gameObject.SetActive(false);
     }
     public void ShowStandardText()
     {
-	show("here i give u halo!!!");
+	    show("here i give u halo!!!");
     }
     public void show(string textarg , int speed=-1 ,float offset_x = 0)
     {
-	if (speed == -1)
-	    speed = textSpeed;
-	rt.anchoredPosition = Vector3.right*( jacob.transform.position.x - player.transform.position.x+ offset_x)*canvasToWorldFactor;
         gameObject.SetActive(true);
-	CurrentText = textarg;
-	StartCoroutine(DisplayText(speed));
+        if (speed == -1)
+	        speed = textSpeed;
+
+        rt.anchoredPosition = Vector3.right*( jacob.transform.position.x - player.transform.position.x+ offset_x)*canvasToWorldFactor;
+    	CurrentText = textarg;
+	    StartCoroutine(DisplayText(speed));
     }
     void Update()
     {
@@ -48,20 +49,21 @@ public class NPCThoughtBubbleController : MonoBehaviour
 
     private IEnumerator DisplayText(int speed)
     {
-	string originalText = CurrentText;
-	string displayedText = "";
-	int alphaIndex = 0;
-	text.text = "";
-	foreach(char c in CurrentText.ToCharArray())
-	{
-	    alphaIndex++;
-	    text.text = originalText;
-	    if(c != ' ')
-                AudioController.Dialogue_sound = true;
-	    displayedText = text.text.Insert(alphaIndex,kAlphaCode);
-	    text.text=displayedText;
-	    yield return new WaitForSecondsRealtime(kMaxTextTime/speed);
-	}
-	AudioController.Dialogue_sound = false;
+	    string originalText = CurrentText;
+	    string displayedText = "";
+	    int alphaIndex = 0;
+	    text.text = "";
+	    foreach(char c in CurrentText.ToCharArray())
+	    {
+	        alphaIndex++;
+	        text.text = originalText;
+	        if(c != ' ')
+                    AudioController.Dialogue_sound = true;
+	        displayedText = text.text.Insert(alphaIndex,kAlphaCode);
+	        text.text=displayedText;
+	        yield return new WaitForSecondsRealtime(kMaxTextTime/speed);
+	    }
+	    AudioController.Dialogue_sound = false;
+        player.ToggleHalo();
     }
 }
