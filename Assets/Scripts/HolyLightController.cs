@@ -7,21 +7,22 @@ public class HolyLightController : MonoBehaviour
     public static bool move;
     public float speed;
     public float stop;
-    public Light2D light;
+    private Light2D holyLight;
     void Start()
     {
-	light.pointLightOuterRadius =0.679f;
-	light.pointLightInnerRadius =0.679f;
+        holyLight = GetComponent<Light2D>();
+        holyLight.pointLightOuterRadius =0.679f;
+        holyLight.pointLightInnerRadius =0.679f;
         move = true;
     }
 
     void FixedUpdate()
     {
-        if (move & light.pointLightOuterRadius <= stop)
-	{
-	    light.pointLightOuterRadius += speed;
-	    light.pointLightInnerRadius +=0.786f*speed;
-	}
+        if (move & holyLight.pointLightOuterRadius <= stop)
+	    {
+            holyLight.pointLightOuterRadius += speed;
+            holyLight.pointLightInnerRadius +=0.786f*speed;
+	    }
 	
 
 	//transform.position = new Vector3(transform.position.x, transform.position.y - speed, transform.position.z);

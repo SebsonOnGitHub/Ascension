@@ -27,7 +27,7 @@ public class speech_bubble_controller : MonoBehaviour
     public void close()
     {
 	gameObject.SetActive(false);
-	StopAllCoroutines();
+	StopCoroutine(DisplayText(0));
     }
 
     private IEnumerator DisplayText(int speed)

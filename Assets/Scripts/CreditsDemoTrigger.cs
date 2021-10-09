@@ -13,8 +13,6 @@ public class CreditsDemoTrigger : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         scroller.SetActive(true);
-        player.toggleThinkable(false);
-        player.toggleMovable(false);
 
         volume = backgroundSource.volume;
         StartCoroutine(Fade());

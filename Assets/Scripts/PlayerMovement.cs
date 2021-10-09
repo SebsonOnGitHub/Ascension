@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Experimental.Rendering.Universal;
 public class PlayerMovement : MonoBehaviour
 {
     public ThinkingController thinkingController;
@@ -12,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer playerSprite;
     private int direction;
     private BoxCollider2D boxCollider;
+    private GameObject halo;
     private static int CSrunning;
     private static int CSrunDirection;
     private static float CSmoveSpeed;
@@ -26,16 +28,44 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         playerSprite = GetComponentInChildren<SpriteRenderer>();
+
+        foreach (Transform child in transform)
+            if (child.name == "Halo")
+                halo = child.gameObject;
+
         movable = false;
         thinkable = false;
 	    CSrunning = 0;
         CSrunDirection = 0;
+
     }
 
     void FixedUpdate()
     {
-	    //TODO: Remove legacy code.
-	    AudioController.walkingPlayer = anim.GetBool("run");
+        float flyingSpeed = 1f;
+
+        switch (CutSceneManager.getCurrentCutScene())
+        {
+            case 6:
+                toggleMovable(false);
+                toggleThinkable(false);
+                body.gravityScale = 0;
+                transform.position = new Vector3(transform.position.x, transform.position.y + flyingSpeed, transform.position.z);
+                break;
+            case 7:
+                float triggerX = 47.65f;
+                float direction = Mathf.Abs(transform.position.x - triggerX) / (transform.position.x - triggerX);
+                transform.position = new Vector3(transform.position.x - direction * flyingSpeed, transform.position.y, transform.position.z);
+                break;
+            case 8:
+                transform.position = new Vector3(transform.position.x, transform.position.y + flyingSpeed, transform.position.z);
+                break;
+            default:
+                break;
+        }
+
+        //TODO: Remove legacy code.
+        AudioController.walkingPlayer = anim.GetBool("run");
 
         if (CSrunning > 0)
 	    {
@@ -45,15 +75,15 @@ public class PlayerMovement : MonoBehaviour
 	    
 	        return;
 	    }
-	
-	if (thinkingController.getThinkingState())
+
+    if (thinkingController.getThinkingState())
 	{
 	    anim.SetBool("run", false);
 	    return;
 	}
 	
 	float horizontalInput = 0;
-	if (movable )
+	if (movable)
 	    horizontalInput = Input.GetAxis("Horizontal");
 	
 	body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
@@ -80,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
     
     public bool isThinking()
     {
-	return thinkingController.getThinkingState();
+        return thinkingController.getThinkingState();
     }
     public void toggleMovable(bool canMove)
     {
@@ -94,5 +124,11 @@ public class PlayerMovement : MonoBehaviour
     public void SetThought(string thought, string solution,  UnityEvent solved ,UnityEvent notSolved)
     {
     	thinkingController.SetThought(thought.ToUpper(),solution.ToUpper(),solved,notSolved);
+    }
+
+    public void ToggleHalo()
+    {
+        anim.SetBool("halo", !anim.GetBool("halo"));
+        halo.gameObject.SetActive(!halo.gameObject.activeSelf);
     }
 }
