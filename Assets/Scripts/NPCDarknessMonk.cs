@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-public class NPC2Movement : MonoBehaviour
+public class NPCDarknessMonk : MonoBehaviour
 {
     public PlayerMovement player;
     public speech_bubble_controller speech_bubble;
@@ -24,21 +24,23 @@ public class NPC2Movement : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D other)
     {
-	if (other.name == "Player") {
+	if (other.name == "Halo") {
 	    playerInColBox = false;
 	}
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-	if (other.name == "Player" )
+	if (other.name == "Halo" )
 	{
 	    playerInColBox = true;
 	    if(firstTalk)
 	    {
+		player.SetThought("solution is bajs","bajs",goalReached,goalNotReached);
+
 		player.toggleThinkable(false);
 		player.toggleMovable(false);
 		float offset = transform.position.x-player.transform.position.x;
-		speech_bubble.show(Dialogue,-1,offset);
+		speech_bubble.show (Dialogue,-1,offset);
 		talking = true;
 	    }
 	}
@@ -51,11 +53,11 @@ public class NPC2Movement : MonoBehaviour
 	    if(Input.GetKey(KeyCode.Space) && !player.isThinking())
 	    {
 		prevKey = KeyCode.Space;
-		if(talking) // player entered space and now we close dialogue box
+		if(talking)
 		{
-		    if (firstTalk) 
+		    if (firstTalk)
 		    {
-			player.SetThought("there is a dog","there is a god",goalReached,goalNotReached);
+			player.SetThought("skriv bajs","bajs",goalReached,goalNotReached);
 			firstTalk = false;
 			Destroy(GetComponent<BoxCollider2D>());
 		    }
@@ -64,19 +66,19 @@ public class NPC2Movement : MonoBehaviour
 		    player.toggleThinkable(true);
 		    player.toggleMovable(true);
 		}
-		else if(playerInColBox) // player pressed space and now we show dialogue box
+		else if(playerInColBox)
 		{
 		    
 		    if(player.transform.position.x > transform.position.x)
 		    {
-			sprite.flipX=true;
+			sprite.flipX=false;
 		    }else
 		    {
-			sprite.flipX=false;
+			sprite.flipX=true;
 		    }
+		    float offset = transform.position.x-player.transform.position.x;
 		    player.toggleThinkable(false);
 		    player.toggleMovable(false);
-		    float offset = transform.position.x-player.transform.position.x;
 		    speech_bubble.show(Dialogue,-1,offset);
 		    talking = true;
 		}
@@ -86,3 +88,4 @@ public class NPC2Movement : MonoBehaviour
 	    prevKey= KeyCode.None;
     }
 }
+ 

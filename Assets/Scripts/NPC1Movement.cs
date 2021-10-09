@@ -27,7 +27,7 @@ public class NPC1Movement : MonoBehaviour
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         CutSceneManager.IncreaseCutScene();
-	    once = true;
+	once = true;
     }
 
     void Update()
@@ -50,7 +50,8 @@ public class NPC1Movement : MonoBehaviour
             case 3: // start talking until player inputs "return"
 		if(once)
 		{
-		    speech_bubble.show (Dialogue);
+		    float offset = transform.position.x-player.transform.position.x;
+		    speech_bubble.show (Dialogue,-1,offset);
 		    once = false;
 		}
 		if(Input.GetKeyDown(KeyCode.Space) )

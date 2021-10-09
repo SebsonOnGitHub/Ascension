@@ -3,41 +3,47 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-public class speech_bubble_controller : MonoBehaviour
+
+public class NPCThoughtBubbleController : MonoBehaviour
 {
-    public float posX;
-    private float startPosX;
+    // Start is called before the first frame update
+    public float offset_x;
     public TMP_Text text;
     private string CurrentText;
     const string kAlphaCode = "<color=#00000000>";
     const float kMaxTextTime = 0.5f;
     public int textSpeed = 5;
-    private RectTransform rt;
     const float canvasToWorldFactor = 65.0f;
-    
+    public PlayerMovement player;
+    public NPCJacobMovement jacob;
+    private RectTransform rt;
     void Start()
     {
 	rt = GetComponent<RectTransform>();
-	startPosX = posX;
         gameObject.SetActive(false);
+    }
+    public void ShowStandardText()
+    {
+	show("here i give u halo!!!");
     }
     public void show(string textarg , int speed=-1 ,float offset_x = 0)
     {
-	rt.anchoredPosition = Vector3.right*offset_x*canvasToWorldFactor;
-
-
-	//        rt.anchoredPosition.localPosition += Vector3.Right;
 	if (speed == -1)
 	    speed = textSpeed;
+	rt.anchoredPosition = Vector3.right*( jacob.transform.position.x - player.transform.position.x+ offset_x)*canvasToWorldFactor;
         gameObject.SetActive(true);
 	CurrentText = textarg;
 	StartCoroutine(DisplayText(speed));
     }
-    
+    void Update()
+    {
+	rt.anchoredPosition = Vector3.right*( jacob.transform.position.x - player.transform.position.x+ offset_x)*canvasToWorldFactor;
+	//transform.Translate( Vector3.zero + player.transform.position);
+    }
     public void close()
     {
 	gameObject.SetActive(false);
-	StopCoroutine(DisplayText(0));
+	StopAllCoroutines();
     }
 
     private IEnumerator DisplayText(int speed)
@@ -58,5 +64,4 @@ public class speech_bubble_controller : MonoBehaviour
 	}
 	AudioController.Dialogue_sound = false;
     }
-    
 }
