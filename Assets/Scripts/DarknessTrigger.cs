@@ -5,6 +5,7 @@ using UnityEngine;
 public class DarknessTrigger : MonoBehaviour
 {
     public AudioSource backgroundSource;
+    public Animator playerAnim;
     public bool darknessRight;
 
     private static float originalVolume;
@@ -18,8 +19,13 @@ public class DarknessTrigger : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (playerAnim.GetBool("halo"))
+            return;
+
         if (darknessRight)
             fadeOut = collision.transform.position.x > transform.position.x;
+        else
+            fadeOut = collision.transform.position.x < transform.position.x;
 
         if (routine != null)
             StopCoroutine(routine);

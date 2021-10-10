@@ -12,39 +12,49 @@ public class NPCThoughtBubbleController : MonoBehaviour
     private string CurrentText;
     const string kAlphaCode = "<color=#00000000>";
     const float kMaxTextTime = 0.5f;
-    public int textSpeed = 5;
+    public int defaultTextSpeed = 5;
     const float canvasToWorldFactor = 65.0f;
     public PlayerMovement player;
     public NPCJacobMovement jacob;
     private RectTransform rt;
+    private Animator anim;
+    private int textSpeed;
+
     void Awake()
     {
 	    rt = GetComponent<RectTransform>();
-        gameObject.SetActive(false);
+        anim = GetComponent<Animator>();
     }
     public void ShowStandardText()
     {
-	    show("here i give u halo!!!");
+	    show("asdasdhere i give u halo!!!");
     }
     public void show(string textarg , int speed=-1 ,float offset_x = 0)
     {
-        gameObject.SetActive(true);
+        anim.SetBool("thinking", true);
+
         if (speed == -1)
-	        speed = textSpeed;
+            textSpeed = defaultTextSpeed;
+        else
+            textSpeed = speed;
 
         rt.anchoredPosition = Vector3.right*( jacob.transform.position.x - player.transform.position.x+ offset_x)*canvasToWorldFactor;
     	CurrentText = textarg;
-	    StartCoroutine(DisplayText(speed));
     }
     void Update()
     {
-	rt.anchoredPosition = Vector3.right*( jacob.transform.position.x - player.transform.position.x+ offset_x)*canvasToWorldFactor;
-	//transform.Translate( Vector3.zero + player.transform.position);
+	    rt.anchoredPosition = Vector3.right*( jacob.transform.position.x - player.transform.position.x+ offset_x)*canvasToWorldFactor;
+	    //transform.Translate( Vector3.zero + player.transform.position);
     }
     public void close()
     {
-	gameObject.SetActive(false);
-	StopAllCoroutines();
+        StopAllCoroutines();
+        anim.SetBool("thinking", false);
+    }
+
+    public void startDisplayText()
+    {
+        StartCoroutine(DisplayText(textSpeed));
     }
 
     private IEnumerator DisplayText(int speed)

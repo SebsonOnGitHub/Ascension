@@ -42,22 +42,30 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        float flyingSpeed = 1f;
+        float flyingSpeed = 0.08f;
 
         switch (CutSceneManager.getCurrentCutScene())
         {
             case 6:
                 toggleMovable(false);
                 toggleThinkable(false);
+                anim.SetBool("wings", true);
                 body.gravityScale = 0;
-                transform.position = new Vector3(transform.position.x, transform.position.y + flyingSpeed, transform.position.z);
+                CutSceneManager.IncreaseCutScene();
                 break;
             case 7:
-                float triggerX = 47.65f;
-                float direction = Mathf.Abs(transform.position.x - triggerX) / (transform.position.x - triggerX);
-                transform.position = new Vector3(transform.position.x - direction * flyingSpeed, transform.position.y, transform.position.z);
+                transform.position = new Vector3(transform.position.x, transform.position.y + flyingSpeed, transform.position.z);
                 break;
             case 8:
+                float triggerX = 47.7f;
+                float direction = Mathf.Abs(transform.position.x - triggerX) / (transform.position.x - triggerX);
+                transform.position = new Vector3(transform.position.x - direction * flyingSpeed, transform.position.y, transform.position.z);
+
+                if (Mathf.Abs(transform.position.x - triggerX) <= 0.1f)
+                    CutSceneManager.IncreaseCutScene();
+
+                break;
+            case 9:
                 transform.position = new Vector3(transform.position.x, transform.position.y + flyingSpeed, transform.position.z);
                 break;
             default:

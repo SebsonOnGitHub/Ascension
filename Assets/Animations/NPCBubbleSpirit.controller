@@ -46,7 +46,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 2a32649406ecfea4b8ad4bbd442a3e8d, type: 2}
+  m_Motion: {fileID: 7400000, guid: c7253258a15e3f74a981a367e865e7a7, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -126,7 +126,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 3748a7aa68d71f04791c265385211bc3, type: 2}
+  m_Motion: {fileID: 7400000, guid: 612a394f99c4eda4688e8825fd37b09e, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -138,7 +138,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BubbleSpirit
+  m_Name: NPCBubbleSpirit
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: thinking
@@ -181,7 +181,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d647648e1ccfb054b9c70d8e1db44641, type: 2}
+  m_Motion: {fileID: 7400000, guid: 9fac55ad40672084a995cd04605b4bf0, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
