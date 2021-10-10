@@ -7,7 +7,7 @@ public class NPC2Movement : MonoBehaviour
     public PlayerMovement player;
     public speech_bubble_controller speech_bubble;
     public string Dialogue;
-    private bool talking, UnfreezeNext,firstTalk,playerInColBox;
+    private bool talking, firstTalk,playerInColBox;
     public UnityEvent goalReached;
     public UnityEvent goalNotReached;
     private KeyCode prevKey;
@@ -16,7 +16,6 @@ public class NPC2Movement : MonoBehaviour
     {
 	sprite = GetComponent<SpriteRenderer>();
         talking =false;
-	UnfreezeNext = false;
 	firstTalk = true;
 	playerInColBox = false;
 	prevKey = KeyCode.None;

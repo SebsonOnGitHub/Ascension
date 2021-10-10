@@ -12,7 +12,6 @@ public class TypingManager : MonoBehaviour
     public Text currDisplay;
     public Text pointerDisplay;
     public Text removedDisplay;
-    private bool goalWasReached = false;
     private KeyCode prevKey;
     string pointerSymbol = "|";
     float timeInterval = 0;
@@ -42,8 +41,8 @@ public class TypingManager : MonoBehaviour
     
     void Start()
     {
-	currDisplay.text = sentence.startText;
-	sentence.pointerIndex = sentence.startText.Length;
+		currDisplay.text = sentence.startText;
+		sentence.pointerIndex = sentence.startText.Length;
         setpointer();
     }
 
@@ -125,7 +124,6 @@ public class TypingManager : MonoBehaviour
 	updateDisplay();
 	sentence.goalNotReached = notSolved;
 	sentence.goalReached=solved;
-	goalWasReached=false;
     }
 }
 
