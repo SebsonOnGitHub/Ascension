@@ -22,10 +22,9 @@ public class speech_bubble_controller : MonoBehaviour
         gameObject.SetActive(false);
     }
     public void show(string textarg , int speed=-1 ,float offset_x = 0)
-    {
-	rt.anchoredPosition = Vector3.right*offset_x*canvasToWorldFactor;
-
-
+    {	
+	//transform.position = new Vector3(transform.position.x,transform.position.y,transform.position.z);
+		rt.anchoredPosition = Vector3.right*offset_x*canvasToWorldFactor;
 	//        rt.anchoredPosition.localPosition += Vector3.Right;
 	if (speed == -1)
 	    speed = textSpeed;
