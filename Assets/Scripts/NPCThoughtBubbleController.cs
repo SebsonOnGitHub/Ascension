@@ -27,7 +27,7 @@ public class NPCThoughtBubbleController : MonoBehaviour
     }
     public void ShowStandardText()
     {
-	    show("asdasdhere i give u halo!!!");
+	    show("Halo!");
     }
     public void show(string textarg , int speed=-1 ,float offset_x = 0)
     {

@@ -7,6 +7,8 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class PlayerMovement : MonoBehaviour
 {
     public ThinkingController thinkingController;
+    public AudioSource wingAudio;
+    public AudioSource thoughtAudio;
 
     private Rigidbody2D body;
     private Animator anim;
@@ -14,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private int direction;
     private BoxCollider2D boxCollider;
     private GameObject halo;
+    private GameObject candle;
     private static int CSrunning;
     private static int CSrunDirection;
     private static float CSmoveSpeed;
@@ -30,8 +33,12 @@ public class PlayerMovement : MonoBehaviour
         playerSprite = GetComponentInChildren<SpriteRenderer>();
 
         foreach (Transform child in transform)
+        {
             if (child.name == "Halo")
                 halo = child.gameObject;
+            if (child.name == "Candle")
+                candle = child.gameObject;
+        }
 
         movable = false;
         thinkable = false;
@@ -54,19 +61,22 @@ public class PlayerMovement : MonoBehaviour
                 CutSceneManager.IncreaseCutScene();
                 break;
             case 7:
-                transform.position = new Vector3(transform.position.x, transform.position.y + flyingSpeed, transform.position.z);
+                transform.position = new Vector3(transform.position.x, transform.position.y + flyingSpeed/8, transform.position.z);
                 break;
             case 8:
-                float triggerX = 47.7f;
+                float triggerX = 47.63f;
                 float direction = Mathf.Abs(transform.position.x - triggerX) / (transform.position.x - triggerX);
                 transform.position = new Vector3(transform.position.x - direction * flyingSpeed, transform.position.y, transform.position.z);
-
                 if (Mathf.Abs(transform.position.x - triggerX) <= 0.1f)
                     CutSceneManager.IncreaseCutScene();
-
                 break;
             case 9:
                 transform.position = new Vector3(transform.position.x, transform.position.y + flyingSpeed, transform.position.z);
+                break;
+            case 10:
+                break;
+            case 11:
+                transform.position = new Vector3(transform.position.x, transform.position.y + 0.015f, transform.position.z);
                 break;
             default:
                 break;
@@ -138,5 +148,34 @@ public class PlayerMovement : MonoBehaviour
     {
         anim.SetBool("halo", !anim.GetBool("halo"));
         halo.gameObject.SetActive(!halo.gameObject.activeSelf);
+    }
+
+    public void PlayWingSound()
+    {
+        wingAudio.Play();
+    }
+    
+    public IEnumerator newThought()
+    {
+        Color color = candle.GetComponent<SpriteRenderer>().color;
+        float speed = 0.006f;
+
+        thoughtAudio.Play();
+
+        while (color.a < 1)
+        {
+            color.a += 1f/255f;
+            candle.GetComponent<SpriteRenderer>().color = color;
+            yield return new WaitForSecondsRealtime(speed);
+        }
+
+        yield return new WaitForSecondsRealtime(0.5f);
+
+        while (color.a > 0)
+        {
+            color.a -= 1f/255f;
+            candle.GetComponent<SpriteRenderer>().color = color;
+            yield return new WaitForSecondsRealtime(speed);
+        }
     }
 }

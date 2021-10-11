@@ -49,5 +49,8 @@ public class ThinkingController : MonoBehaviour
     public void SetThought(string thought, string solution, UnityEvent solved ,UnityEvent notSolved)
     {
     	Typingmanager.SetThought(thought,solution,solved,notSolved);
+
+        if (thought != "")
+            StartCoroutine(player.newThought());
     }
 }

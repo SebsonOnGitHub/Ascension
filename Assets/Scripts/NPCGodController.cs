@@ -21,7 +21,6 @@ public class NPCGodController : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-	Debug.Log("player has entered god's ColBox");
 	if (other.name == "Player")
 	{
 	    player.toggleThinkable(false);
@@ -66,7 +65,6 @@ public class NPCGodController : MonoBehaviour
 		    speech_bubble.close();
 		    talking = false;
 		    player.toggleThinkable(true);
-		    player.toggleMovable(true);
 		}
 	    }
 	}
