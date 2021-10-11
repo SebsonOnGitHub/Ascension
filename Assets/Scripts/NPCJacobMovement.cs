@@ -4,23 +4,27 @@ using UnityEngine;
 using UnityEngine.Events;
 public class NPCJacobMovement : MonoBehaviour
 {
-    private Animator anim;
     public PlayerMovement player;
     public speech_bubble_controller speech_bubble;
-    public string Dialogue;
-    private bool talking,playerInColBox;
-    public NPCThoughtBubbleController bubble;
+	public NPCThoughtBubbleController bubble;
+	public string Dialogue;
+	
+	private Animator anim;
+	private bool talking,playerInColBox;
     private KeyCode prevKey;
-    
+	private static bool giveHalo;
+	private static BoxCollider2D boxColl;
 
-    void Start()
+	void Start()
     {
         anim = GetComponent<Animator>();
         anim.SetBool("frontFacing", true);
-	talking =false;
-	playerInColBox = false;
-	prevKey = KeyCode.None;
-    }
+		talking =false;
+		playerInColBox = false;
+		prevKey = KeyCode.None;
+		giveHalo = false;
+		boxColl = GetComponent<BoxCollider2D>();
+	}
     
     void OnTriggerExit2D(Collider2D other)
     {
@@ -28,12 +32,19 @@ public class NPCJacobMovement : MonoBehaviour
 	    playerInColBox = false;
 	}
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-	if (other.name == "Player" )
-	{
-	    playerInColBox = true;
-	}
+		if (other.name == "Player" )
+		{
+			playerInColBox = false;
+		}
+
+		if(giveHalo)
+        {
+			player.ToggleHalo();
+			giveHalo = false;
+        }
     }
 
     void Update()
@@ -62,5 +73,12 @@ public class NPCJacobMovement : MonoBehaviour
 	}
 	if (Input.GetKeyUp(prevKey))
 	    prevKey= KeyCode.None;
+    }
+
+	public static void activateGiveHalo()
+    {
+		NPCJacobMovement.boxColl.enabled = false;
+		NPCJacobMovement.boxColl.enabled = true;
+		NPCJacobMovement.giveHalo = true;
     }
 }

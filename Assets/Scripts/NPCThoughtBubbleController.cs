@@ -27,7 +27,7 @@ public class NPCThoughtBubbleController : MonoBehaviour
     }
     public void ShowStandardText()
     {
-	    show("Halo!");
+	    show("The Most Divine Of Light Comes Not From The Heavens Above, But From Within Us.");
     }
     public void show(string textarg , int speed=-1 ,float offset_x = 0)
     {
@@ -60,20 +60,21 @@ public class NPCThoughtBubbleController : MonoBehaviour
     private IEnumerator DisplayText(int speed)
     {
 	    string originalText = CurrentText;
-	    string displayedText = "";
+	    string displayedText = CurrentText;
 	    int alphaIndex = 0;
 	    text.text = "";
 	    foreach(char c in CurrentText.ToCharArray())
 	    {
 	        alphaIndex++;
 	        text.text = originalText;
-	        if(c != ' ')
-                    AudioController.Dialogue_sound = true;
+	        //if(c != ' ')
+                    //AudioController.Dialogue_sound = true;
 	        displayedText = text.text.Insert(alphaIndex,kAlphaCode);
 	        text.text=displayedText;
-	        yield return new WaitForSecondsRealtime(kMaxTextTime/speed);
 	    }
-	    AudioController.Dialogue_sound = false;
-        player.ToggleHalo();
+
+        yield return new WaitForSecondsRealtime(0);
+        //AudioController.Dialogue_sound = false;
+        NPCJacobMovement.activateGiveHalo();
     }
 }

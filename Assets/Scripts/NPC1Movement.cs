@@ -45,36 +45,34 @@ public class NPC1Movement : MonoBehaviour
                 anim.SetBool("run", false);
                 body.velocity = new Vector2(0, body.velocity.y);
 
-		CutSceneManager.IncreaseCutScene();
-		break;
+		        CutSceneManager.IncreaseCutScene();
+		        break;
             case 3: // start talking until player inputs "return"
-		if(once)
-		{
-		    float offset = transform.position.x-player.transform.position.x;
-		    speech_bubble.show (Dialogue,-1,offset);
-		    once = false;
-		}
-		if(Input.GetKeyDown(KeyCode.Space) )
-		{
-		    CutSceneManager.IncreaseCutScene();
-		}
+		        if(once)
+		        {
+		            float offset = transform.position.x-player.transform.position.x;
+                    speech_bubble.show (Dialogue,4,offset, 0.33f);
+                    once = false;
+		        }
+		        if(Input.GetKeyDown(KeyCode.Space))
+		            CutSceneManager.IncreaseCutScene();
                 break;
             case 4: // walk away and reveal the hint.
-		speech_bubble.close();
-	        player.toggleThinkable(true);
-		anim.SetBool("run", true);
+		        speech_bubble.close();
+	                player.toggleThinkable(true);
+		        anim.SetBool("run", true);
 
                 body.velocity = new Vector2(speed, body.velocity.y);
                 body.GetComponent<SpriteRenderer>().flipX = true;
                 MaskController.follow = true;
                 break;
 	        case 5:  //disappear and kill self.
-		    MaskController.follow = false;
-		    AudioController.walkingNPC1=false;
-		    Destroy(gameObject);
-		    break;
-                default:
-		    Debug.Log("Fault in NPC1Movement");
+		        MaskController.follow = false;
+		        AudioController.walkingNPC1=false;
+		        Destroy(gameObject);
+		        break;
+            default:
+		        Debug.Log("Fault in NPC1Movement");
                 break;
         }
 

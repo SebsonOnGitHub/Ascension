@@ -37,7 +37,7 @@ public class NPC2Movement : MonoBehaviour
 		player.toggleThinkable(false);
 		player.toggleMovable(false);
 		float offset = transform.position.x-player.transform.position.x;
-		speech_bubble.show(Dialogue,-1,offset);
+		speech_bubble.show(Dialogue,6,offset,0.9f);
 		talking = true;
 	    }
 	}
@@ -68,16 +68,16 @@ public class NPC2Movement : MonoBehaviour
 		    
 		    if(player.transform.position.x > transform.position.x)
 		    {
-			sprite.flipX=true;
+				sprite.flipX=true;
 		    }else
 		    {
-			sprite.flipX=false;
+				sprite.flipX=false;
 		    }
 		    player.toggleThinkable(false);
 		    player.toggleMovable(false);
 		    float offset = transform.position.x-player.transform.position.x;
-		    speech_bubble.show(Dialogue,-1,offset);
-		    talking = true;
+		    speech_bubble.show(Dialogue, 6, offset, 0.9f);
+			talking = true;
 		}
 	    }
 	}

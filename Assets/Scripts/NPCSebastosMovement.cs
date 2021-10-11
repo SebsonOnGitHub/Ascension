@@ -37,7 +37,7 @@ public class NPCSebastosMovement : MonoBehaviour
 		player.toggleThinkable(false);
 		player.toggleMovable(false);
 		float offset = transform.position.x-player.transform.position.x;
-		speech_bubble.show (Dialogue,-1,offset);
+		speech_bubble.show (Dialogue,3,offset,0.6f);
 		talking = true;
 	    }
 	}
@@ -75,8 +75,8 @@ public class NPCSebastosMovement : MonoBehaviour
 		    float offset = transform.position.x-player.transform.position.x;
 		    player.toggleThinkable(false);
 		    player.toggleMovable(false);
-		    speech_bubble.show(Dialogue,-1,offset);
-		    talking = true;
+		    speech_bubble.show(Dialogue, 3, offset, 0.6f);
+			talking = true;
 		}
 	    }
 	}
