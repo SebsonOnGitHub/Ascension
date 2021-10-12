@@ -51,8 +51,9 @@ public class NPC1Movement : MonoBehaviour
 		        if(once)
 		        {
 		            float offset = transform.position.x-player.transform.position.x;
-                    speech_bubble.show (Dialogue,4,offset, 0.33f);
-                    once = false;
+			    speech_bubble.move(offset,0.0f);
+			    speech_bubble.show (Dialogue,4, 0.33f);
+			    once = false;
 		        }
 		        if(Input.GetKeyDown(KeyCode.Space))
 		            CutSceneManager.IncreaseCutScene();

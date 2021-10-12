@@ -35,7 +35,7 @@ public class NPCJacobMovement : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-		if (other.name == "Player" )
+		if (other.name == "Player" && !player.isThinking() )
 		{
 			playerInColBox = false;
 		}
@@ -66,7 +66,8 @@ public class NPCJacobMovement : MonoBehaviour
 		    float offset = transform.position.x-player.transform.position.x;
 		    player.toggleThinkable(false);
 		    player.toggleMovable(false);
-		    speech_bubble.show(Dialogue,1,offset); //show(Dialogue);
+		    speech_bubble.move(offset,0.0f);
+		    speech_bubble.show(Dialogue,1); //show(Dialogue);
 		    talking = true;
 		}
 	    }

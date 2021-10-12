@@ -29,7 +29,7 @@ public class NPC2Movement : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-	if (other.name == "Player" )
+	if (other.name == "Player" && !player.isThinking() )
 	{
 	    playerInColBox = true;
 	    if(firstTalk)
@@ -37,7 +37,8 @@ public class NPC2Movement : MonoBehaviour
 		player.toggleThinkable(false);
 		player.toggleMovable(false);
 		float offset = transform.position.x-player.transform.position.x;
-		speech_bubble.show(Dialogue,6,offset,0.9f);
+		speech_bubble.move(offset,0.0f);
+		speech_bubble.show(Dialogue,6,0.9f);
 		talking = true;
 	    }
 	}
@@ -47,7 +48,7 @@ public class NPC2Movement : MonoBehaviour
     {
 	if(prevKey == KeyCode.None)
 	{
-	    if(Input.GetKey(KeyCode.Space) && !player.isThinking())
+	    if(Input.GetKey(KeyCode.Space) && !player.isThinking() )
 	    {
 		prevKey = KeyCode.Space;
 		if(talking) // player entered space and now we close dialogue box
@@ -76,7 +77,8 @@ public class NPC2Movement : MonoBehaviour
 		    player.toggleThinkable(false);
 		    player.toggleMovable(false);
 		    float offset = transform.position.x-player.transform.position.x;
-		    speech_bubble.show(Dialogue, 6, offset, 0.9f);
+		    speech_bubble.move(offset,0.0f);
+		    speech_bubble.show(Dialogue, 6, 0.9f);
 			talking = true;
 		}
 	    }

@@ -29,7 +29,7 @@ public class NPCSebastosMovement : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-	if (other.name == "Player" )
+	if (other.name == "Player" && !player.isThinking() )
 	{
 	    playerInColBox = true;
 	    if(firstTalk)
@@ -37,7 +37,8 @@ public class NPCSebastosMovement : MonoBehaviour
 		player.toggleThinkable(false);
 		player.toggleMovable(false);
 		float offset = transform.position.x-player.transform.position.x;
-		speech_bubble.show (Dialogue,3,offset,0.6f);
+		speech_bubble.move(offset,0.0f);
+		speech_bubble.show (Dialogue,3,0.6f);
 		talking = true;
 	    }
 	}
@@ -75,8 +76,9 @@ public class NPCSebastosMovement : MonoBehaviour
 		    float offset = transform.position.x-player.transform.position.x;
 		    player.toggleThinkable(false);
 		    player.toggleMovable(false);
-		    speech_bubble.show(Dialogue, 3, offset, 0.6f);
-			talking = true;
+		    speech_bubble.move(offset,0.0f);
+		    speech_bubble.show(Dialogue, 3,0.6f);
+		    talking = true;
 		}
 	    }
 	}
