@@ -57,7 +57,7 @@ public class NPCDarknessMonk : MonoBehaviour
 		    if (firstTalk)
 			{
 				player.SetThought("a holy being is human", "being a human is holy", goalReached, goalNotReached);
-				ThoughtSizeController.setFontSize(30);
+				ThoughtSizeController.setFontSize(28);
 				firstTalk = false;
 				Destroy(GetComponent<BoxCollider2D>());
 		    }

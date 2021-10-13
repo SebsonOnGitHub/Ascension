@@ -556,6 +556,7 @@ Transform:
   - {fileID: 114708561}
   - {fileID: 1224590212}
   - {fileID: 220869666}
+  - {fileID: 1818117364}
   m_Father: {fileID: 1046675227}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -952,6 +953,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundSource: {fileID: 2031019803}
   playerAnim: {fileID: 1520194453}
+  player: {fileID: 1520194452}
   darknessRight: 1
 --- !u!61 &213442771
 BoxCollider2D:
@@ -1026,9 +1028,9 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.004
+  m_Intensity: 0
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: 455c23d9000000001140e53c55bfb12ee158b89d710b7c70
+  m_ApplyToSortingLayers: 455c23d955bfb12ee158b89d00000000710b7c70
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -1271,8 +1273,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1520194452}
   speech_bubble: {fileID: 1495839141}
-  Dialogue: Brother Jacob Has Taken A Vow Of Silence. If We Could Only See Inside
-    His Mind...
+  Dialogue: Brother Jacob Has Taken a Vow of Silence. However the Mindful Might Still
+    Hear Him...
   goalReached:
     m_PersistentCalls:
       m_Calls:
@@ -1844,8 +1846,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1520194452}
   speech_bubble: {fileID: 1495839141}
-  Dialogue: An Angel Of The Highest Order Is No Different Than You, It Is Just A
-    Matter Of Mindset.
+  Dialogue: An Angel of the Highest Order is No Different Than You, it is Just a
+    Matter of Mindset.
   goalReached:
     m_PersistentCalls:
       m_Calls:
@@ -15178,7 +15180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 20
   speech_bubble: {fileID: 1495839141}
-  Dialogue: The Chains That Bind You Exist Only In Your Mind.
+  Dialogue: The Chains That Bind You Exist Only in Your Mind.
   player: {fileID: 1520194452}
 --- !u!50 &453533552
 Rigidbody2D:
@@ -17270,9 +17272,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37dd6b31857ec7025b9c967aa0e0dd21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset_x: 1
+  posX: 1.36
+  posY: 0.15
   text: {fileID: 148753783}
   defaultTextSpeed: 5
+  canvasToWorldFactor: 60
   player: {fileID: 1520194452}
   jacob: {fileID: 1851536335}
 --- !u!114 &585416200
@@ -18890,6 +18894,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   backgroundSource: {fileID: 2031019803}
   playerAnim: {fileID: 1520194453}
+  player: {fileID: 1520194452}
   darknessRight: 0
 --- !u!61 &808035330
 BoxCollider2D:
@@ -20330,10 +20335,14 @@ MonoBehaviour:
   goalNotReached:
     m_PersistentCalls:
       m_Calls: []
-  Dialogue: 'Have You Come To Prove Yourself Worthy To Me? Then You May Speak Now
-    Little One! '
-  bubble_offset_x: 2.2
-  bubble_offset_y: 0
+  Dialogue: You have come far and learned a lot. Now you are scared to leave your
+    physical form, but remember that it never was. All that is, is in your mind and
+    all that is in your mind is you.
+  bubble_offset_x: 2
+  bubble_offset_y: 2
+  cutOff1: 85
+  cutOff2: 61
+  speakingSpeed: 3
 --- !u!61 &1431451039
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -21540,6 +21549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07eebc65870fab94e8512578392836c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outerLightIncrease: 6
+  innerLightIncrease: 6
 --- !u!1 &1761659711
 GameObject:
   m_ObjectHideFlags: 0
@@ -32629,6 +32640,78 @@ Transform:
   m_Father: {fileID: 1520194456}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1818117363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1818117364}
+  - component: {fileID: 1818117365}
+  m_Layer: 0
+  m_Name: GlobalLightPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1818117364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818117363}
+  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -105.56667, y: 31.166668, z: 0}
+  m_LocalScale: {x: -3.3333333, y: 3.3333333, z: 1}
+  m_Children: []
+  m_Father: {fileID: 103260732}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1818117365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818117363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_LightType: 4
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.5
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0.01
+  m_LightVolumeOpacity: 0
+  m_ApplyToSortingLayers: 1140e53c
+  m_LightCookieSprite: {fileID: 0}
+  m_UseNormalMap: 0
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_ShadowIntensity: 0
+  m_ShadowVolumeIntensity: 0
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 1
+  m_PointLightDistance: 3
+  m_PointLightQuality: 1
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1001 &1826358817
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33584,7 +33667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1520194452}
   speech_bubble: {fileID: 1495839141}
-  Dialogue: If You Believe In Him He Will Always Help You In Your Hour Of Need!
+  Dialogue: If You Believe in Him He Will Always Help You in Your Hour of Need!
   goalReached:
     m_PersistentCalls:
       m_Calls:
@@ -34030,7 +34113,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 4c1747368b068604c81c722b051157c7, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.6
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0

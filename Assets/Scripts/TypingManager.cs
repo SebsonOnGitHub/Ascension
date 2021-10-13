@@ -49,16 +49,16 @@ public class TypingManager : MonoBehaviour
     void Update()
     {
         if(sentence.isGoalReached(thinkingController))
-	{
-	    updateDisplay();
-	    return;
-	}
+		{
+			updateDisplay();
+			return;
+		}
         timeInterval += Time.deltaTime;
         timeAnimation += Time.deltaTime;
 	
         currDisplay.gameObject.SetActive(thinkingController.isThinkingIdle());
         removedDisplay.gameObject.SetActive(thinkingController.isThinkingIdle());
-	pointerDisplay.gameObject.SetActive(thinkingController.isThinkingIdle() && (timeAnimation >= 0.4));
+		pointerDisplay.gameObject.SetActive(thinkingController.isThinkingIdle() && (timeAnimation >= 0.4) && (sentence.currText != "" || sentence.removedText != ""));
 	
 	if (timeAnimation >=0.8)
 	    timeAnimation =0;
@@ -96,17 +96,17 @@ public class TypingManager : MonoBehaviour
 	    string removed = sentence.removedText;
 	    if ((removed.IndexOf(c) >= 0 & Char.IsLetterOrDigit(c)) | c.Equals((char)32)) //Add a character
 	    {
-		sentence.currText = curr.Insert(sentence.pointerIndex, c.ToString());
-		if(!c.Equals((char)32))
-		    sentence.removedText = removed.Remove(removed.IndexOf(c), 1);
-		sentence.pointerIndex++;
+			sentence.currText = curr.Insert(sentence.pointerIndex, c.ToString());
+			if(!c.Equals((char)32))
+				sentence.removedText = removed.Remove(removed.IndexOf(c), 1);
+			sentence.pointerIndex++;
 	    }
 	    else if (sentence.pointerIndex > 0 & c.Equals((char)8)) //Remove a character
 	    {
-		sentence.pointerIndex--;
-		if (!curr[sentence.pointerIndex].Equals((char)32))
-		    sentence.removedText = removed + curr[sentence.pointerIndex];
-		sentence.currText = curr.Remove(sentence.pointerIndex, 1);
+			sentence.pointerIndex--;
+			if (Char.IsLetterOrDigit(curr[sentence.pointerIndex]))
+				sentence.removedText = removed + curr[sentence.pointerIndex];
+			sentence.currText = curr.Remove(sentence.pointerIndex, 1);
 	    }
 	}
 	  
@@ -144,10 +144,10 @@ public class Sentence
     {
         if (currText.Equals(goalText) & !thinkingController.getThinkingState())
         {
-	    currText="";
-	    removedText="";
-	    pointerText="";
-	    pointerIndex=0;
+			currText="";
+			removedText="";
+			pointerText="";
+			pointerIndex=0;
             goalReached.Invoke();
 
             return true;

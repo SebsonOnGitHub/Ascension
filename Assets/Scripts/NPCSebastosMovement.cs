@@ -55,7 +55,7 @@ public class NPCSebastosMovement : MonoBehaviour
 		{
 		    if (firstTalk)
 		    {
-			player.SetThought("What's the deal with mute monks?", "What's the deal with mute monks", goalReached,goalNotReached);
+			player.SetThought("Mute is silent", "i must listen", goalReached,goalNotReached);
 			firstTalk = false;
 			Destroy(GetComponent<BoxCollider2D>());
 		    }

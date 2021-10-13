@@ -45,9 +45,7 @@ public class speech_bubble_controller : MonoBehaviour
     private IEnumerator DisplayText(int speed, float voicePitch)
     {
         float defaultPitch = dialogue.pitch;
-
         dialogue.pitch = voicePitch;
-
         string originalText = CurrentText;
 	    string displayedText = "";
 	    int alphaIndex = 0;
