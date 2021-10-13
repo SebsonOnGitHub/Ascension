@@ -29,7 +29,7 @@ public class NPCDarknessMonk : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-	if (other.name == "Halo" )
+	if (other.name == "Halo" && !player.isThinking() )
 	{
 	    playerInColBox = true;
 	    if(firstTalk)

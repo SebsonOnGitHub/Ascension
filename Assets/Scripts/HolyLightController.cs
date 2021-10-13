@@ -19,12 +19,10 @@ public class HolyLightController : MonoBehaviour
     void FixedUpdate()
     {
         if (move & holyLight.pointLightOuterRadius <= stop)
-	    {
-            holyLight.pointLightOuterRadius += speed;
-            holyLight.pointLightInnerRadius +=0.786f*speed;
-	    }
+	{
+	    holyLight.pointLightOuterRadius += speed;
+	    holyLight.pointLightInnerRadius +=0.786f*speed;
+	}
 	
-
-	//transform.position = new Vector3(transform.position.x, transform.position.y - speed, transform.position.z);
     }
 }

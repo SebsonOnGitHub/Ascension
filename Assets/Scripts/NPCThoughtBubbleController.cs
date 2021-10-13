@@ -7,13 +7,14 @@ using TMPro;
 public class NPCThoughtBubbleController : MonoBehaviour
 {
     // Start is called before the first frame update
-    public float offset_x;
+    public float posX;
+    public float posY;
     public TMP_Text text;
     private string CurrentText;
     const string kAlphaCode = "<color=#00000000>";
     const float kMaxTextTime = 0.5f;
     public int defaultTextSpeed = 5;
-    const float canvasToWorldFactor = 65.0f;
+    public float canvasToWorldFactor;
     public PlayerMovement player;
     public NPCJacobMovement jacob;
     private RectTransform rt;
@@ -23,14 +24,15 @@ public class NPCThoughtBubbleController : MonoBehaviour
     void Awake()
     {
 	    rt = GetComponent<RectTransform>();
-        anim = GetComponent<Animator>();
+	    anim = GetComponent<Animator>();
     }
     public void ShowStandardText()
     {
 	    show("The Most Divine Of Light Comes Not From The Heavens Above, But From Within Us.");
     }
-    public void show(string textarg , int speed=-1 ,float offset_x = 0)
+    public void show(string textarg , int speed=-1)
     {
+	rt.anchoredPosition = (Vector3.right*posX + Vector3.right*(jacob.transform.position.x - player.transform.position.x) + Vector3.up*posY)*canvasToWorldFactor;
         anim.SetBool("thinking", true);
 
         if (speed == -1)
@@ -38,12 +40,15 @@ public class NPCThoughtBubbleController : MonoBehaviour
         else
             textSpeed = speed;
 
-        rt.anchoredPosition = Vector3.right*( jacob.transform.position.x - player.transform.position.x+ offset_x)*canvasToWorldFactor;
+
+        
     	CurrentText = textarg;
     }
-    void Update()
+    
+    void FixedUpdate()
     {
-	    rt.anchoredPosition = Vector3.right*( jacob.transform.position.x - player.transform.position.x+ offset_x)*canvasToWorldFactor;
+	rt.anchoredPosition = (Vector3.right*posX + Vector3.right*(jacob.transform.position.x - player.transform.position.x) + Vector3.up*posY)*canvasToWorldFactor;
+
 	    //transform.Translate( Vector3.zero + player.transform.position);
     }
     public void close()

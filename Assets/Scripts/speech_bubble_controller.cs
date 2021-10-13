@@ -22,11 +22,13 @@ public class speech_bubble_controller : MonoBehaviour
 	startPosX = posX;
         gameObject.SetActive(false);
     }
-    public void show(string textarg , int speed=-1 ,float offset_x = 0, float voicePitch = 0.39f)
+    public void move (float offset_x,float offset_y)
+    {
+	rt.anchoredPosition = Vector3.up*offset_y*canvasToWorldFactor+Vector3.right*offset_x*canvasToWorldFactor;
+    }
+
+    public void show(string textarg , int speed=-1 , float voicePitch = 0.39f)
     {	
-	//transform.position = new Vector3(transform.position.x,transform.position.y,transform.position.z);
-		rt.anchoredPosition = Vector3.right*offset_x*canvasToWorldFactor;
-	//        rt.anchoredPosition.localPosition += Vector3.Right;
 	if (speed == -1)
 	    speed = textSpeed;
         gameObject.SetActive(true);

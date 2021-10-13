@@ -29,17 +29,27 @@ public class ThinkingController : MonoBehaviour
         transform.position = new Vector3(player.transform.position.x + offsetX, player.transform.position.y + offsetY, player.transform.position.z);
 
         if (Input.GetKeyDown(KeyCode.Return) & player.thinkable & !currThinking)
-            anim.SetBool("thinking", !anim.GetBool("thinking"));
+	{
+	    anim.SetBool("thinking", !anim.GetBool("thinking"));
+	    
+	}
     }
 
     public bool getThinkingState()
     {
         return thinkingState;
     }
-
+    public bool isThinkingIdle()
+    {
+	return thinkingState &&!currThinking;
+    }
     public void setThinkingState()
     {
-        thinkingState = !thinkingState;
+        thinkingState = true;
+    }
+    public void unsetThinkingState()
+    {
+	thinkingState = false;
     }
 
     public void setCurrThinking()

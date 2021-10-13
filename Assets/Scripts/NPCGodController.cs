@@ -26,9 +26,9 @@ public class NPCGodController : MonoBehaviour
 	    player.toggleThinkable(false);
 	    player.toggleMovable(false);
 	    float offset = transform.position.x-player.transform.position.x;
-	    speech_bubble.transform.position = new Vector3(speech_bubble.transform.position.x,bubble_offset_y,speech_bubble.transform.position.z);
+	    speech_bubble.move(bubble_offset_x,bubble_offset_y);
 	    offset = 0.0f; // temp test
-	    speech_bubble.show(Dialogue,2,bubble_offset_x, 0.21f);
+	    speech_bubble.show(Dialogue,2, 0.21f);
 	    talking = true;
 	}
 	/*
