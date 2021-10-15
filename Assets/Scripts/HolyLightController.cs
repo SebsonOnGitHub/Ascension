@@ -11,8 +11,8 @@ public class HolyLightController : MonoBehaviour
     void Start()
     {
         holyLight = GetComponent<Light2D>();
-        holyLight.pointLightOuterRadius =0.679f;
-        holyLight.pointLightInnerRadius =0.679f;
+        //holyLight.pointLightOuterRadius =0.679f;
+        //holyLight.pointLightInnerRadius =0.679f;
         move = true;
     }
 
@@ -21,7 +21,7 @@ public class HolyLightController : MonoBehaviour
         if (move & holyLight.pointLightOuterRadius <= stop)
 	{
 	    holyLight.pointLightOuterRadius += speed;
-	    holyLight.pointLightInnerRadius +=0.786f*speed;
+	    holyLight.pointLightInnerRadius += speed;
 	}
 	
     }

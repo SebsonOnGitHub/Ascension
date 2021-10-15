@@ -15,12 +15,18 @@ public class speech_bubble_controller : MonoBehaviour
     private RectTransform rt;
     const float canvasToWorldFactor = 65.0f;
     public AudioSource dialogue;
+    private bool donePrinting;
     
     void Start()
     {
 	rt = GetComponent<RectTransform>();
 	startPosX = posX;
         gameObject.SetActive(false);
+	donePrinting = true;
+    }
+    public bool isDone()
+    {
+	return donePrinting;
     }
     public void move (float offset_x,float offset_y)
     {
@@ -28,18 +34,23 @@ public class speech_bubble_controller : MonoBehaviour
     }
 
     public void show(string textarg , int speed=-1 , float voicePitch = 0.39f)
-    {	
-	if (speed == -1)
-	    speed = textSpeed;
-        gameObject.SetActive(true);
-	CurrentText = textarg;
-	StartCoroutine(DisplayText(speed, voicePitch));
+    {
+	if(donePrinting)
+	{
+	    donePrinting = false;
+	    if (speed == -1)
+		speed = textSpeed;
+	    gameObject.SetActive(true);
+	    CurrentText = textarg;
+	    StartCoroutine(DisplayText(speed, voicePitch));
+	}
     }
     
     public void close()
     {
 	    gameObject.SetActive(false);
 	    StopCoroutine(DisplayText(0, 0));
+	    donePrinting=true;
     }
 
     private IEnumerator DisplayText(int speed, float voicePitch)
@@ -47,21 +58,22 @@ public class speech_bubble_controller : MonoBehaviour
         float defaultPitch = dialogue.pitch;
         dialogue.pitch = voicePitch;
         string originalText = CurrentText;
-	    string displayedText = "";
-	    int alphaIndex = 0;
-	    text.text = "";
-	    foreach(char c in CurrentText.ToCharArray())
-	    {
-	        alphaIndex++;
-	        text.text = originalText;
-	        if(c != ' ')
-                    AudioController.Dialogue_sound = true;
-	        displayedText = text.text.Insert(alphaIndex,kAlphaCode);
-	        text.text=displayedText;
-	        yield return new WaitForSecondsRealtime(kMaxTextTime/speed);
-	    }
-	    AudioController.Dialogue_sound = false;
+	string displayedText = "";
+	int alphaIndex = 0;
+	text.text = "";
+	foreach(char c in CurrentText.ToCharArray())
+	{
+	    alphaIndex++;
+	    text.text = originalText;
+	    if(c != ' ')
+		AudioController.Dialogue_sound = true;
+	    displayedText = text.text.Insert(alphaIndex,kAlphaCode);
+	    text.text=displayedText;
+	    yield return new WaitForSecondsRealtime(kMaxTextTime/speed);
+	}
+	AudioController.Dialogue_sound = false;
         dialogue.pitch = defaultPitch;
+	donePrinting = true;
     }
     
 }

@@ -10,7 +10,7 @@ public class NPC1Movement : MonoBehaviour
     public speech_bubble_controller speech_bubble;
     public string Dialogue;
     private bool once;
-
+    
 
 
     // TODO: TA bort LEGACY code
@@ -19,6 +19,8 @@ public class NPC1Movement : MonoBehaviour
 
     private Rigidbody2D body;
     private Animator anim;
+    public float voicePitch;
+    public int talkingSpeed;
 
 
     void Start()
@@ -30,7 +32,7 @@ public class NPC1Movement : MonoBehaviour
 	once = true;
     }
 
-    void Update()
+    void Update() // fixedUpdate doesn't work here
     {
         AudioController.walkingNPC1 = anim.GetBool("run");
         switch (CutSceneManager.getCurrentCutScene())
@@ -52,10 +54,10 @@ public class NPC1Movement : MonoBehaviour
 		        {
 		            float offset = transform.position.x-player.transform.position.x;
 			    speech_bubble.move(offset,0.0f);
-			    speech_bubble.show (Dialogue,4, 0.33f);
+			    speech_bubble.show (Dialogue,talkingSpeed, voicePitch);
 			    once = false;
 		        }
-		        if(Input.GetKeyDown(KeyCode.Space))
+		        if(Input.GetKeyDown(KeyCode.Space) && speech_bubble.isDone() || Input.GetKeyDown(KeyCode.F1))
 		            CutSceneManager.IncreaseCutScene();
                 break;
             case 4: // walk away and reveal the hint.

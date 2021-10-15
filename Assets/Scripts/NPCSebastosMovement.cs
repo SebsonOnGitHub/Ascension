@@ -12,6 +12,8 @@ public class NPCSebastosMovement : MonoBehaviour
     public UnityEvent goalNotReached;
     private KeyCode prevKey;
     private SpriteRenderer sprite;
+    public float voicePitch;
+    public int talkingSpeed;
     void Start()
     {
 	sprite = GetComponent<SpriteRenderer>();
@@ -19,7 +21,6 @@ public class NPCSebastosMovement : MonoBehaviour
 	firstTalk = true;
 	playerInColBox = false;
 	prevKey = KeyCode.None;
-	
     }
     void OnTriggerExit2D(Collider2D other)
     {
@@ -38,33 +39,49 @@ public class NPCSebastosMovement : MonoBehaviour
 		player.toggleMovable(false);
 		float offset = transform.position.x-player.transform.position.x;
 		speech_bubble.move(offset,0.0f);
-		speech_bubble.show (Dialogue,3,0.6f);
+		speech_bubble.show (Dialogue,talkingSpeed,voicePitch);
 		talking = true;
 	    }
 	}
     }
 
-    void Update()
+    void Update() // fixedUpdate doesn't work here
     {
 	if(prevKey == KeyCode.None)
 	{
-	    if(Input.GetKey(KeyCode.Space) && !player.isThinking())
+	    /********** DEBUG **********/
+	    if(talking && firstTalk && Input.GetKey(KeyCode.F1) && !player.isThinking()  )
+	    {
+		speech_bubble.close();
+		player.SetThought("Mute is silent", "i must listen", goalReached,goalNotReached);
+		firstTalk = false;
+		player.toggleThinkable(true);
+		player.toggleMovable(true);
+		Destroy(GetComponent<BoxCollider2D>());
+	    }
+	    
+	    /*********** ACTUAL CODE **********/
+	    if(Input.GetKey(KeyCode.Space) && !player.isThinking()  )
 	    {
 		prevKey = KeyCode.Space;
-		if(talking)
+		if(talking) // player entered space and now we close dialogue box
 		{
-		    if (firstTalk)
+		    
+		    if (firstTalk && speech_bubble.isDone() ) 
 		    {
 			player.SetThought("Mute is silent", "i must listen", goalReached,goalNotReached);
 			firstTalk = false;
 			Destroy(GetComponent<BoxCollider2D>());
 		    }
-		    speech_bubble.close();
-		    talking = false;
-		    player.toggleThinkable(true);
-		    player.toggleMovable(true);
+		    if (!firstTalk)
+		    {
+			speech_bubble.close();
+			talking = false;
+			player.toggleThinkable(true);
+			player.toggleMovable(true);
+		    }
 		}
-		else if(playerInColBox)
+		else if(playerInColBox) // player pressed space and now we show dialogue box
 		{
 		    if(player.transform.position.x > transform.position.x)
 		    {
@@ -73,11 +90,13 @@ public class NPCSebastosMovement : MonoBehaviour
 		    {
 			sprite.flipX=false;
 		    }
-		    float offset = transform.position.x-player.transform.position.x;
+		    
+		    player.flipX(!sprite.flipX);
 		    player.toggleThinkable(false);
 		    player.toggleMovable(false);
+		    float offset = transform.position.x-player.transform.position.x;
 		    speech_bubble.move(offset,0.0f);
-		    speech_bubble.show(Dialogue, 3,0.6f);
+		    speech_bubble.show(Dialogue, talkingSpeed, voicePitch);
 		    talking = true;
 		}
 	    }

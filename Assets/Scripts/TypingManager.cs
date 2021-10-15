@@ -46,7 +46,7 @@ public class TypingManager : MonoBehaviour
 	setpointer();
     }
 
-    void Update()
+    void Update() //fixedUpdate doesn't work here
     {
         if(sentence.isGoalReached(thinkingController))
 		{
@@ -58,7 +58,7 @@ public class TypingManager : MonoBehaviour
 	
         currDisplay.gameObject.SetActive(thinkingController.isThinkingIdle());
         removedDisplay.gameObject.SetActive(thinkingController.isThinkingIdle());
-		pointerDisplay.gameObject.SetActive(thinkingController.isThinkingIdle() && (timeAnimation >= 0.4) && (sentence.currText != "" || sentence.removedText != ""));
+	pointerDisplay.gameObject.SetActive(thinkingController.isThinkingIdle() && (timeAnimation >= 0.4) && (sentence.currText != "" || sentence.removedText != ""));
 	
 	if (timeAnimation >=0.8)
 	    timeAnimation =0;
@@ -113,9 +113,8 @@ public class TypingManager : MonoBehaviour
 	updateDisplay();
     }
     
-    public void SetThought (string thought, string solution, UnityEvent solved ,UnityEvent notSolved)
+    public void SetThought (string thought, List<string> solution, UnityEvent solved ,UnityEvent notSolved)
     {
-
 	sentence.startText = thought;
 	sentence.currText = thought;
 	sentence.removedText = "";
@@ -124,6 +123,12 @@ public class TypingManager : MonoBehaviour
 	updateDisplay();
 	sentence.goalNotReached = notSolved;
 	sentence.goalReached=solved;
+	
+    }
+    public void addSolution(string solution)
+    {
+	sentence.goalText.Add(solution);
+	
     }
 }
 
@@ -133,7 +138,7 @@ public class Sentence
     public string startText;
     public string currText = "";
     public string removedText = "";
-    public string goalText;
+    public List<string> goalText;
     public string pointerText;
     
     public UnityEvent goalReached;
@@ -142,15 +147,22 @@ public class Sentence
 
     public bool isGoalReached(ThinkingController thinkingController)
     {
-        if (currText.Equals(goalText) & !thinkingController.getThinkingState())
+	bool isReached = false;
+	foreach (string solve in goalText)
+	{
+	    if(currText.Equals(solve))
+		isReached = true;
+	}
+	
+        if (isReached & !thinkingController.getThinkingState())
         {
-			currText="";
-			removedText="";
-			pointerText="";
-			pointerIndex=0;
-            goalReached.Invoke();
+	    currText="";
+	    removedText="";
+	    pointerText="";
+	    pointerIndex=0;
+	    goalReached.Invoke();
 
-            return true;
+	    return true;
         }
         else
             return false;

@@ -17,7 +17,7 @@ public class Dialogue_box_controller : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         transform.position = new Vector3(monk.position.x+offset_x,monk.position.y+offset_y,transform.position.z);
     }

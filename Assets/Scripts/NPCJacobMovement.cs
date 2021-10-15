@@ -47,7 +47,7 @@ public class NPCJacobMovement : MonoBehaviour
         }
     }
 
-    void Update()
+    void Update() // fixedUpdate doesn't work here
     {
 	if(prevKey == KeyCode.None)
 	{

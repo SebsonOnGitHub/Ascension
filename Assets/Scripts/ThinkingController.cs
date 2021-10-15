@@ -24,14 +24,13 @@ public class ThinkingController : MonoBehaviour
     }
 
 
-    void Update()
+    void Update() // fixedUpdate doesn't work here
     {
         transform.position = new Vector3(player.transform.position.x + offsetX, player.transform.position.y + offsetY, player.transform.position.z);
 
         if (Input.GetKeyDown(KeyCode.Return) & player.thinkable & !currThinking)
 	{
 	    anim.SetBool("thinking", !anim.GetBool("thinking"));
-	    
 	}
     }
 
@@ -56,10 +55,14 @@ public class ThinkingController : MonoBehaviour
     {
         currThinking = !currThinking;
     }
+    public void addSolution(string solution)
+    {
+	Typingmanager.addSolution(solution);
+    }
     public void SetThought(string thought, string solution, UnityEvent solved ,UnityEvent notSolved)
     {
-    	Typingmanager.SetThought(thought,solution,solved,notSolved);
-
+	List<string> sol = new List<string>(){solution};
+    	Typingmanager.SetThought(thought,sol,solved,notSolved);
         if (thought != "")
             StartCoroutine(player.newThought());
     }

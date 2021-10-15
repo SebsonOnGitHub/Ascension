@@ -23,7 +23,7 @@ public class PlayerMovement : MonoBehaviour
     public float speed;
     public bool movable;
     public bool thinkable;
-
+    
 
     void Start()
     {
@@ -130,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
     {
         return thinkingController.getThinkingState();
     }
+    
     public void toggleMovable(bool canMove)
     {
         movable = canMove;
@@ -143,6 +144,10 @@ public class PlayerMovement : MonoBehaviour
     {
         thinkingController.SetThought(thought.ToUpper(), solution.ToUpper(), solved, notSolved);
     }
+    public void addSolution(string solution)
+    {
+	thinkingController.addSolution(solution.ToUpper());
+    }
 
     public void ToggleHalo()
     {
@@ -150,6 +155,15 @@ public class PlayerMovement : MonoBehaviour
         halo.gameObject.SetActive(!halo.gameObject.activeSelf);
     }
 
+    public void flipX(bool value)
+    {
+	if(value)
+	    direction = 1;
+	else
+	    direction = -1;
+	//playerSprite.flipX = ;
+	
+    }
     public void PlayWingSound()
     {
         wingAudio.Play();
@@ -168,9 +182,7 @@ public class PlayerMovement : MonoBehaviour
             candle.GetComponent<SpriteRenderer>().color = color;
             yield return new WaitForSecondsRealtime(speed);
         }
-
         yield return new WaitForSecondsRealtime(0.5f);
-
         while (color.a > 0)
         {
             color.a -= 1f/255f;

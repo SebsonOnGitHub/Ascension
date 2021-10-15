@@ -30,7 +30,7 @@ public class AudioController : MonoBehaviour
     }
     
     
-    void Update()
+    void FixedUpdate()
     {
         foreach (AudioSource source in audioSources)
         {

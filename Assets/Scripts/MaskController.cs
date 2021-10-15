@@ -12,7 +12,7 @@ public class MaskController : MonoBehaviour
         follow = false;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if(follow)
             transform.position = new Vector3(NPC.transform.position.x - 9f, transform.position.y, transform.position.z);
