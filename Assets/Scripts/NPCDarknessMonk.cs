@@ -35,6 +35,10 @@ public class NPCDarknessMonk : MonoBehaviour
 	    playerInColBox = true;
 	    if(firstTalk)
 	    {
+		float offset = transform.position.x-player.transform.position.x;
+		speech_bubble.move(offset,0.0f);
+		speech_bubble.show (Dialogue,talkingSpeed,voicePitch);
+		talking = true;
 		if(player.transform.position.x > transform.position.x)
 		{
 		    sprite.flipX=false;
@@ -45,10 +49,7 @@ public class NPCDarknessMonk : MonoBehaviour
 		player.flipX(sprite.flipX);
 		player.toggleThinkable(false);
 		player.toggleMovable(false);
-		float offset = transform.position.x-player.transform.position.x;
-		speech_bubble.move(offset,0.0f);
-		speech_bubble.show (Dialogue,talkingSpeed,voicePitch);
-		talking = true;
+
 	    }
 	}
     }
@@ -69,7 +70,7 @@ public class NPCDarknessMonk : MonoBehaviour
 		firstTalk = false;
 		player.toggleThinkable(true);
 		player.toggleMovable(true);
-		Destroy(GetComponent<BoxCollider2D>());
+		//Destroy(GetComponent<BoxCollider2D>());
 	    }
 	    
 	    /*********** ACTUAL CODE **********/
@@ -78,13 +79,14 @@ public class NPCDarknessMonk : MonoBehaviour
 		prevKey = KeyCode.Space;
 		if(talking) // player entered space and now we close dialogue box
 		{
-		    if (firstTalk && speech_bubble.isDone() )
+		    if (speech_bubble.isDone() && firstTalk )
 		    {
+			Debug.Log(speech_bubble.isDone());
+			firstTalk = false;
 			ThoughtSizeController.setFontSize(30);
 			player.SetThought("a holy being is human", "being a human is holy", goalReached, goalNotReached);
 			player.addSolution("being human is holy");
-			firstTalk = false;
-			Destroy(GetComponent<BoxCollider2D>());
+			//Destroy(GetComponent<BoxCollider2D>());
 		    }
 		    if(!firstTalk)
 		    {

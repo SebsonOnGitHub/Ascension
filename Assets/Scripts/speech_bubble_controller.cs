@@ -16,6 +16,7 @@ public class speech_bubble_controller : MonoBehaviour
     const float canvasToWorldFactor = 65.0f;
     public AudioSource dialogue;
     private bool donePrinting;
+    public TMP_Text hint;
     
     void Start()
     {
@@ -23,6 +24,7 @@ public class speech_bubble_controller : MonoBehaviour
 	startPosX = posX;
         gameObject.SetActive(false);
 	donePrinting = true;
+	hint.gameObject.SetActive(false);
     }
     public bool isDone()
     {
@@ -35,15 +37,14 @@ public class speech_bubble_controller : MonoBehaviour
 
     public void show(string textarg , int speed=-1 , float voicePitch = 0.39f)
     {
-	if(donePrinting)
-	{
+        
 	    donePrinting = false;
 	    if (speed == -1)
 		speed = textSpeed;
 	    gameObject.SetActive(true);
 	    CurrentText = textarg;
 	    StartCoroutine(DisplayText(speed, voicePitch));
-	}
+	
     }
     
     public void close()
@@ -51,8 +52,17 @@ public class speech_bubble_controller : MonoBehaviour
 	    gameObject.SetActive(false);
 	    StopCoroutine(DisplayText(0, 0));
 	    donePrinting=true;
+	    hideHint();
     }
+    public void hideHint()
+    {
+	hint.gameObject.SetActive(false);
 
+    }
+    public void showHint()
+    {
+	hint.gameObject.SetActive(true);
+    }
     private IEnumerator DisplayText(int speed, float voicePitch)
     {
         float defaultPitch = dialogue.pitch;
@@ -74,6 +84,9 @@ public class speech_bubble_controller : MonoBehaviour
 	AudioController.Dialogue_sound = false;
         dialogue.pitch = defaultPitch;
 	donePrinting = true;
+	yield return new WaitForSecondsRealtime(2);
+	showHint();
+	
     }
     
 }
