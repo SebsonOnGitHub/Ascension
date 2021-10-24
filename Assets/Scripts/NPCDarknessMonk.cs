@@ -85,6 +85,8 @@ public class NPCDarknessMonk : MonoBehaviour
 			ThoughtSizeController.setFontSize(30);
 			player.SetThought("a holy being is human", "being a human is holy", goalReached, goalNotReached);
 			player.addSolution("being human is holy");
+			player.addSolution("i am angel");
+			player.addSolution("i am a holy being");
 			//Destroy(GetComponent<BoxCollider2D>());
 		    }
 		    if(!firstTalk)
