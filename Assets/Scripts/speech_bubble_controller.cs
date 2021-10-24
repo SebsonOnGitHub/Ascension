@@ -59,7 +59,7 @@ public class speech_bubble_controller : MonoBehaviour
     }
     public void showHint()
     {
-	hint.gameObject.SetActive(true);
+	    hint.gameObject.SetActive(true);
     }
     private IEnumerator DisplayText(int speed, float voicePitch)
     {
@@ -80,12 +80,11 @@ public class speech_bubble_controller : MonoBehaviour
 	        text.text=displayedText;
 	        yield return new WaitForSecondsRealtime(kMaxTextTime/speed);
 	    }
-        yield return new WaitForSecondsRealtime(1f);
         AudioController.Dialogue_sound = false;
         dialogue.pitch = defaultPitch;
-	donePrinting = true;
-	yield return new WaitForSecondsRealtime(2);
-	showHint();
+	    donePrinting = true;
+	    yield return new WaitForSecondsRealtime(2f);
+	    showHint();
     }
     
 }

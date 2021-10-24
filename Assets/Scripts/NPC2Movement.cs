@@ -18,38 +18,39 @@ public class NPC2Movement : MonoBehaviour
     {
 	sprite = GetComponent<SpriteRenderer>();
         talking =false;
-	firstTalk = true;
-	playerInColBox = false;
-	prevKey = KeyCode.None;
+		firstTalk = true;
+		playerInColBox = false;
+		prevKey = KeyCode.None;
 	
     }
     void OnTriggerExit2D(Collider2D other)
     {
-	if (other.name == "Player") {
-	    playerInColBox = false;
-	}
+		if (other.name == "Player") {
+			playerInColBox = false;
+		}
     }
     private void OnTriggerEnter2D(Collider2D other)
-    {
-	if (other.name == "Player" && !player.isThinking() )
-	{
-	    playerInColBox = true;
-	    if(firstTalk)
-	    {
-		player.toggleThinkable(false);
-		player.toggleMovable(false);
-		float offset = transform.position.x-player.transform.position.x;
-		speech_bubble.move(offset,0.0f);
-		speech_bubble.show(Dialogue,talkingSpeed,voicePitch);
-		talking = true;
-	    }
-	}
+    {		
+		if (other.name == "Player" && !player.isThinking() )
+		{
+			playerInColBox = true;
+			if(firstTalk)
+			{
+			player.toggleThinkable(false);
+			player.toggleMovable(false);
+			float offset = transform.position.x-player.transform.position.x;
+			speech_bubble.move(offset,0.0f);
+			speech_bubble.show(Dialogue,talkingSpeed,voicePitch);
+			talking = true;
+			}
+		}
     }
 
     void Update() // fixedUpdate doesn't work here
     {
+		player.toggleSpaceHint(playerInColBox & !talking, 0);
 
-	if(prevKey == KeyCode.None)
+		if (prevKey == KeyCode.None)
 	{
 	    /********** DEBUG **********/
 	    if(talking & firstTalk & Input.GetKey(KeyCode.F1) && !player.isThinking()  )
@@ -57,6 +58,7 @@ public class NPC2Movement : MonoBehaviour
 		speech_bubble.close();
 		player.SetThought("there is a dog","there is a god",goalReached,goalNotReached);
 		firstTalk = false;
+		talking = false;
 		player.toggleThinkable(true);
 		player.toggleMovable(true);
 		Destroy(GetComponent<BoxCollider2D>());

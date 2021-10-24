@@ -31,8 +31,16 @@ public class NPCGodController : MonoBehaviour
 	prevKey = KeyCode.None;
 	firstTalk = true;
     }
-    
-    private void OnTriggerEnter2D(Collider2D other)
+
+	void OnTriggerExit2D(Collider2D other)
+	{
+		if (other.name == "Player")
+		{
+			playerInColBox = false;
+		}
+	}
+
+	private void OnTriggerEnter2D(Collider2D other)
     {
 	dialogueParts[0] = Dialogue.Substring(0, cutOff1);
 	dialogueParts[1] = Dialogue.Substring(cutOff1, cutOff2);
@@ -52,6 +60,8 @@ public class NPCGodController : MonoBehaviour
     }
     void Update() // fixedUpdate doesn't work here
     {
+		player.toggleSpaceHint(playerInColBox & !talking, 3);
+	
 	if(prevKey == KeyCode.None)
 	{
 	    /********** DEBUG **********/
@@ -70,6 +80,7 @@ public class NPCGodController : MonoBehaviour
 		    player.toggleThinkable(true);
 		    player.SetThought("I fear to think I'm here", "I think therefore I am", goalReached, goalNotReached);
 		    firstTalk = false;
+			talking = false;
 		    dialoguePartIterator = 0;
 		}
 	    }
@@ -83,7 +94,6 @@ public class NPCGodController : MonoBehaviour
 		    speech_bubble.close();
 		    if (dialoguePartIterator <= 2)
 		    {
-			Debug.Log("next page in the bible");
 			speech_bubble.show(dialogueParts[dialoguePartIterator],talkingSpeed, voicePitch);
 			dialoguePartIterator++;
 		    }
