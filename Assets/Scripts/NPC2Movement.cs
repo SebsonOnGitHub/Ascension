@@ -14,6 +14,7 @@ public class NPC2Movement : MonoBehaviour
     private SpriteRenderer sprite;
     public float voicePitch;
     public int talkingSpeed;
+    public string puzzleHint;
     void Start()
     {
 	sprite = GetComponent<SpriteRenderer>();
@@ -55,7 +56,7 @@ public class NPC2Movement : MonoBehaviour
 	    if(talking & firstTalk & Input.GetKey(KeyCode.F1) && !player.isThinking()  )
 	    {
 		speech_bubble.close();
-		player.SetThought("there is a dog","there is a god",goalReached,goalNotReached);
+		player.SetThought("there is a dog","there is a god",goalReached,goalNotReached,puzzleHint);
 		firstTalk = false;
 		player.toggleThinkable(true);
 		player.toggleMovable(true);
@@ -71,7 +72,7 @@ public class NPC2Movement : MonoBehaviour
 		    
 		    if (firstTalk && speech_bubble.isDone() ) 
 		    {
-			player.SetThought("there is a dog","there is a god",goalReached,goalNotReached);
+			player.SetThought("there is a dog","there is a god",goalReached,goalNotReached,puzzleHint);
 			firstTalk = false;
 			Destroy(GetComponent<BoxCollider2D>());
 		    }

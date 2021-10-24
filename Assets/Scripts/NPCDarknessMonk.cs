@@ -14,6 +14,7 @@ public class NPCDarknessMonk : MonoBehaviour
     private SpriteRenderer sprite;
     public float voicePitch;
     public int talkingSpeed;
+    public string puzzleHint;
     void Start()
     {
 	sprite = GetComponent<SpriteRenderer>();
@@ -64,7 +65,7 @@ public class NPCDarknessMonk : MonoBehaviour
 		//prevKey = KeyCode.F1;
 		speech_bubble.close();
 		ThoughtSizeController.setFontSize(30);
-		player.SetThought("a holy being is human", "being a human is holy", goalReached, goalNotReached);
+		player.SetThought("a holy being is human", "being a human is holy", goalReached, goalNotReached,puzzleHint);
 		player.addSolution("being human is holy");
 		firstTalk = false;
 		player.toggleThinkable(true);
@@ -83,7 +84,7 @@ public class NPCDarknessMonk : MonoBehaviour
 			Debug.Log(speech_bubble.isDone());
 			firstTalk = false;
 			ThoughtSizeController.setFontSize(30);
-			player.SetThought("a holy being is human", "being a human is holy", goalReached, goalNotReached);
+			player.SetThought("a holy being is human", "being a human is holy", goalReached, goalNotReached, puzzleHint);
 			player.addSolution("being human is holy");
 			player.addSolution("i am angel");
 			player.addSolution("i am a holy being");

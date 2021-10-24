@@ -143,9 +143,9 @@ public class PlayerMovement : MonoBehaviour
     {
         thinkable = canAct;
     }
-    public void SetThought(string thought, string solution, UnityEvent solved, UnityEvent notSolved)
+    public void SetThought(string thought, string solution, UnityEvent solved, UnityEvent notSolved, string hint = "")
     {
-        thinkingController.SetThought(thought.ToUpper(), solution.ToUpper(), solved, notSolved);
+        thinkingController.SetThought(thought.ToUpper(), solution.ToUpper(), solved, notSolved, hint);
     }
     public void addSolution(string solution)
     {
