@@ -14,26 +14,23 @@ https://freesound.org/people/daveincamas/sounds/44076/
 Gåljudet
 https://freesound.org/people/straget/sounds/414921/
 
-textljud
-https://freesound.org/people/malakme/sounds/468927/
+Candle
+https://kvsr.itch.io/candle
 
-smoke for doggy transform
-https://opengameart.org/content/smoke-fire-animated-particle-16x16
-
-Nice dog
-https://www.pinterest.com/pin/690176711628164962/
+Candle Sound;
+https://freesound.org/people/_bliind/sounds/524578/
 
 Bad dog
 https://craftpix.net/freebies/free-street-animal-pixel-art-asset-pack/
 
+Nice dog
+https://www.pinterest.com/pin/690176711628164962/
+
 Bark sound
 https://freesound.org/people/crazymonke9/sounds/418106/
 
-Dog bark (unused):
-https://soundbible.com/75-Dog-Woof.html
-
-Woof sound
-https://freesound.org/people/freakinbehemoth/sounds/243400/
+Torch
+https://opengameart.org/content/animated-pixel-torch
 
 Fire sound:
 https://freesound.org/people/aunrea/sounds/495660/
@@ -46,9 +43,3 @@ https://www.pinterest.at/pin/52635889375583910/?amp_client_id=CLIENT_ID(_)&mweb_
 
 Wing Sound:
 https://freesound.org/people/AgentDD/sounds/246224/
-
-Candle Sprite:
-https://kvsr.itch.io/candle
-
-Candle Sound;
-https://freesound.org/people/_bliind/sounds/524578/

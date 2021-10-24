@@ -29,11 +29,11 @@ public class speech_bubble_controller : MonoBehaviour
 
     public void show(string textarg , int speed=-1 , float voicePitch = 0.39f)
     {	
-	if (speed == -1)
-	    speed = textSpeed;
+	    if (speed == -1)
+	        speed = textSpeed;
         gameObject.SetActive(true);
-	CurrentText = textarg;
-	StartCoroutine(DisplayText(speed, voicePitch));
+	    CurrentText = textarg;
+	    StartCoroutine(DisplayText(speed, voicePitch));
     }
     
     public void close()
@@ -60,7 +60,8 @@ public class speech_bubble_controller : MonoBehaviour
 	        text.text=displayedText;
 	        yield return new WaitForSecondsRealtime(kMaxTextTime/speed);
 	    }
-	    AudioController.Dialogue_sound = false;
+        yield return new WaitForSecondsRealtime(1f);
+        AudioController.Dialogue_sound = false;
         dialogue.pitch = defaultPitch;
     }
     

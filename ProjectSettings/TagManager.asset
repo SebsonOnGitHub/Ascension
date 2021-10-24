@@ -58,6 +58,9 @@ TagManager:
   - name: Player
     uniqueID: 1021657105
     locked: 0
+  - name: PlayerHalo
+    uniqueID: 2562417515
+    locked: 0
   - name: InFrontPlayer
     uniqueID: 1887177585
     locked: 0

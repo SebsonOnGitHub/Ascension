@@ -77,6 +77,9 @@ public class PlayerMovement : MonoBehaviour
                 break;
             case 11:
                 transform.position = new Vector3(transform.position.x, transform.position.y + 0.015f, transform.position.z);
+                toggleThinkable(false);
+                break;
+            case 12:
                 break;
             default:
                 break;
@@ -148,6 +151,7 @@ public class PlayerMovement : MonoBehaviour
     {
         anim.SetBool("halo", !anim.GetBool("halo"));
         halo.gameObject.SetActive(!halo.gameObject.activeSelf);
+        playerSprite.sortingLayerName = "PlayerHalo";
     }
 
     public void PlayWingSound()
