@@ -37,11 +37,11 @@ public class ThinkingController : MonoBehaviour
 
     public bool getThinkingState()
     {
-        return thinkingState;
+        return thinkingState || currThinking;
     }
     public bool isThinkingIdle()
     {
-	return thinkingState &&!currThinking;
+	    return thinkingState && !currThinking;
     }
     public void setThinkingState()
     {

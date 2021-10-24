@@ -38,7 +38,7 @@ public class NPCDarknessMonk : MonoBehaviour
 		player.toggleThinkable(false);
 		player.toggleMovable(false);
 		float offset = transform.position.x-player.transform.position.x;
-		speech_bubble.show (Dialogue,-1,offset);
+		speech_bubble.show (Dialogue);
 
 		talking = true;
 	    }
@@ -57,7 +57,7 @@ public class NPCDarknessMonk : MonoBehaviour
 		    if (firstTalk)
 			{
 				player.SetThought("a holy being is human", "being a human is holy", goalReached, goalNotReached);
-				ThoughtSizeController.setFontSize(30);
+				ThoughtSizeController.setFontSize(28);
 				firstTalk = false;
 				Destroy(GetComponent<BoxCollider2D>());
 		    }
@@ -79,7 +79,7 @@ public class NPCDarknessMonk : MonoBehaviour
 		    float offset = transform.position.x-player.transform.position.x;
 		    player.toggleThinkable(false);
 		    player.toggleMovable(false);
-		    speech_bubble.show(Dialogue,-1,offset);
+		    speech_bubble.show(Dialogue);
 		    talking = true;
 		}
 	    }

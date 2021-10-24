@@ -6,6 +6,7 @@ public class DarknessTrigger : MonoBehaviour
 {
     public AudioSource backgroundSource;
     public Animator playerAnim;
+    public PlayerMovement player;
     public bool darknessRight;
 
     private static float originalVolume;
@@ -38,6 +39,8 @@ public class DarknessTrigger : MonoBehaviour
 
         if (fadeOut)
             fadeInt = -1;
+        
+        player.toggleThinkable(!fadeOut);
 
         do
         {
