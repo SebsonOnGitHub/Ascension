@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public ThinkingController thinkingController;
     public AudioSource wingAudio;
     public AudioSource thoughtAudio;
+    public AudioSource dialogueAudio;
 
     private Rigidbody2D body;
     private Animator anim;
@@ -17,8 +19,10 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D boxCollider;
     private GameObject halo;
     private GameObject candle;
+    private GameObject spaceHint;
     private static int CSrunning;
     private static int CSrunDirection;
+    public static int[] spaceHintTot = {0,0,0,0};
     private static float CSmoveSpeed;
     public float speed;
     public bool movable;
@@ -38,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
                 halo = child.gameObject;
             if (child.name == "Candle")
                 candle = child.gameObject;
+            if (child.name == "SpaceHint")
+                spaceHint = child.gameObject;
         }
 
         movable = false;
@@ -72,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
             case 9:
                 transform.position = new Vector3(transform.position.x, transform.position.y + flyingSpeed, transform.position.z);
+                dialogueAudio.volume = 0.24f;
                 break;
             case 10:
                 break;
@@ -159,6 +166,12 @@ public class PlayerMovement : MonoBehaviour
         playerSprite.sortingLayerName = "PlayerHalo";
     }
 
+    public void toggleSpaceHint(bool hintOn, int id)
+    {
+        spaceHintTot[id] = hintOn ? 1 : 0;
+        spaceHint.SetActive(spaceHintTot.Sum() >= 1 & !isThinking());
+    }
+
     public void flipX(bool value)
     {
 	if(value)
@@ -176,20 +189,20 @@ public class PlayerMovement : MonoBehaviour
     public IEnumerator newThought()
     {
         Color color = candle.GetComponent<SpriteRenderer>().color;
-        float speed = 0.006f;
+        float speed = 0.12f;
 
         thoughtAudio.Play();
 
         while (color.a < 1)
         {
-            color.a += 1f/255f;
+            color.a += 20f/255f;
             candle.GetComponent<SpriteRenderer>().color = color;
             yield return new WaitForSecondsRealtime(speed);
         }
         yield return new WaitForSecondsRealtime(0.5f);
         while (color.a > 0)
         {
-            color.a -= 1f/255f;
+            color.a -= 20f/255f;
             candle.GetComponent<SpriteRenderer>().color = color;
             yield return new WaitForSecondsRealtime(speed);
         }

@@ -47,7 +47,9 @@ public class NPCSebastosMovement : MonoBehaviour
 
     void Update() // fixedUpdate doesn't work here
     {
-	if(prevKey == KeyCode.None)
+		player.toggleSpaceHint(playerInColBox & !talking, 1);
+
+	if (prevKey == KeyCode.None)
 	{
 	    /********** DEBUG **********/
 	    if(talking && firstTalk && Input.GetKey(KeyCode.F1) && !player.isThinking()  )
@@ -55,6 +57,7 @@ public class NPCSebastosMovement : MonoBehaviour
 		speech_bubble.close();
 		player.SetThought("Mute is silent", "i must listen", goalReached,goalNotReached);
 		firstTalk = false;
+		talking = false;
 		player.toggleThinkable(true);
 		player.toggleMovable(true);
 		Destroy(GetComponent<BoxCollider2D>());
