@@ -4,29 +4,91 @@
 
 
 
--Game Developer-
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---Developers---
+
 Sebastian Ragnarsson
 
--Game Developer-
 Jakob Svedling
 
--Tileset-
+
+
+---Graphics---
+
+-Tileset & Backgrounds-
 Pyromantic Arts
 
--Monk Sprites-
+-Monk-
 IndigoFenix
+
+-Candle-
+NYKNCK
+
+-Evil Dog-
+craftpix.net
+
+-Good Dog-
+Chenghao Wei
+
+-Torch-
+Xlive99
+
+-Angel Wings-
+Josue Aguiar
+
+-Other Graphics-
+Sebastian Ragnarsson
+
+
+
+---Sounds and SFX---
 
 -Music-
 RobotMeadows
 
--Bird Sound-
-Mixkit
-
--Chain Sound-
+-Chain SFX-
 Daveincamas
 
--Walking Sound-
+-Walking SFX-
 Straget
+
+-Candle SFX-
+_bliind
+
+-Bark SFX-
+Crazymonke9
+
+-Torch SFX-
+Aunrea
+
+-Choir SFX-
+random_intruder
+
+-Angel Wings SFX-
+AgentDD
+
+-Other SFX-
+Sebastian Ragnarsson
+
+
+
+
+
+
 
 
 

@@ -49,7 +49,6 @@ public class NPCDarknessMonk : MonoBehaviour
 		player.flipX(sprite.flipX);
 		player.toggleThinkable(false);
 		player.toggleMovable(false);
-
 	    }
 	}
     }
@@ -112,6 +111,7 @@ public class NPCDarknessMonk : MonoBehaviour
 		    float offset = transform.position.x-player.transform.position.x;
 		    speech_bubble.move(offset,0.0f);
 		    speech_bubble.show(Dialogue, talkingSpeed, voicePitch);
+
 		    talking = true;
 		}
 	    }

@@ -37,14 +37,12 @@ public class speech_bubble_controller : MonoBehaviour
 
     public void show(string textarg , int speed=-1 , float voicePitch = 0.39f)
     {
-        
-	    donePrinting = false;
-	    if (speed == -1)
-		speed = textSpeed;
-	    gameObject.SetActive(true);
-	    CurrentText = textarg;
-	    StartCoroutine(DisplayText(speed, voicePitch));
-	
+	donePrinting = false;
+	if (speed == -1)
+	    speed = textSpeed;
+	gameObject.SetActive(true);
+	CurrentText = textarg;
+	StartCoroutine(DisplayText(speed, voicePitch));
     }
     
     public void close()
@@ -68,25 +66,26 @@ public class speech_bubble_controller : MonoBehaviour
         float defaultPitch = dialogue.pitch;
         dialogue.pitch = voicePitch;
         string originalText = CurrentText;
-	string displayedText = "";
-	int alphaIndex = 0;
-	text.text = "";
-	foreach(char c in CurrentText.ToCharArray())
-	{
-	    alphaIndex++;
-	    text.text = originalText;
-	    if(c != ' ')
-		AudioController.Dialogue_sound = true;
-	    displayedText = text.text.Insert(alphaIndex,kAlphaCode);
-	    text.text=displayedText;
-	    yield return new WaitForSecondsRealtime(kMaxTextTime/speed);
-	}
-	AudioController.Dialogue_sound = false;
+
+	    string displayedText = "";
+	    int alphaIndex = 0;
+	    text.text = "";
+	    foreach(char c in CurrentText.ToCharArray())
+	    {
+	        alphaIndex++;
+	        text.text = originalText;
+	        if(c != ' ')
+                    AudioController.Dialogue_sound = true;
+	        displayedText = text.text.Insert(alphaIndex,kAlphaCode);
+	        text.text=displayedText;
+	        yield return new WaitForSecondsRealtime(kMaxTextTime/speed);
+	    }
+        yield return new WaitForSecondsRealtime(1f);
+        AudioController.Dialogue_sound = false;
         dialogue.pitch = defaultPitch;
 	donePrinting = true;
 	yield return new WaitForSecondsRealtime(2);
 	showHint();
-	
     }
     
 }

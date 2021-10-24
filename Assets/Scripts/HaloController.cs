@@ -15,9 +15,21 @@ public class HaloController : MonoBehaviour
 
     public void increaseBrightness()
     {
-        //TODO: Increase the halo light
-	halo.pointLightOuterRadius += outerLightIncrease;
-        halo.pointLightInnerRadius += innerLightIncrease;
-        Debug.Log("The light has been increased around the Halo!");
+        StartCoroutine(Fade());
+	    //halo.pointLightOuterRadius += outerLightIncrease;
+        //halo.pointLightInnerRadius += innerLightIncrease;
+    }
+
+    private IEnumerator Fade()
+    {
+        float newOuterMax = halo.pointLightOuterRadius + outerLightIncrease;
+        float newInnerMax = halo.pointLightInnerRadius + innerLightIncrease;
+
+        while (halo.pointLightOuterRadius < newOuterMax && halo.pointLightInnerRadius < newInnerMax)
+        {
+            halo.pointLightOuterRadius += 0.01f;
+            halo.pointLightInnerRadius += 0.01f;
+            yield return new WaitForSecondsRealtime(0.003f);
+        } 
     }
 }
