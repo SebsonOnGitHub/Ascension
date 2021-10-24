@@ -58,12 +58,16 @@ public class NPC1Movement : MonoBehaviour
 			    once = false;
 		        }
 		        if(Input.GetKeyDown(KeyCode.Space) && speech_bubble.isDone() || Input.GetKeyDown(KeyCode.F1))
+			{
 		            CutSceneManager.IncreaseCutScene();
+			    player.startNewThought();;
+			}
                 break;
             case 4: // walk away and reveal the hint.
-		        speech_bubble.close();
-	                player.toggleThinkable(true);
-		        anim.SetBool("run", true);
+		
+		speech_bubble.close();
+		player.toggleThinkable(true);
+		anim.SetBool("run", true);
 
                 body.velocity = new Vector2(speed, body.velocity.y);
                 body.GetComponent<SpriteRenderer>().flipX = true;

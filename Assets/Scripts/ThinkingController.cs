@@ -59,10 +59,10 @@ public class ThinkingController : MonoBehaviour
     {
 	Typingmanager.addSolution(solution);
     }
-    public void SetThought(string thought, string solution, UnityEvent solved ,UnityEvent notSolved)
+    public void SetThought(string thought, string solution, UnityEvent solved ,UnityEvent notSolved,string hint = "")
     {
 	List<string> sol = new List<string>(){solution};
-    	Typingmanager.SetThought(thought,sol,solved,notSolved);
+    	Typingmanager.SetThought(thought,sol,solved,notSolved,hint);
         if (thought != "")
             StartCoroutine(player.newThought());
     }

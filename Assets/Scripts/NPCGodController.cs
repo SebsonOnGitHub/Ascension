@@ -19,6 +19,7 @@ public class NPCGodController : MonoBehaviour
     public float voicePitch;
     private bool firstTalk;
     private bool playerInColBox;
+    public string puzzleHint;
     // Start is called before the first frame update
     void Start()
     {
@@ -78,7 +79,7 @@ public class NPCGodController : MonoBehaviour
 		{
 		    talking = false;
 		    player.toggleThinkable(true);
-		    player.SetThought("I fear to think I'm here", "I think therefore I am", goalReached, goalNotReached);
+		    player.SetThought("I fear to think I'm here", "I think therefore I am", goalReached, goalNotReached,puzzleHint);
 		    firstTalk = false;
 			talking = false;
 		    dialoguePartIterator = 0;
@@ -103,7 +104,7 @@ public class NPCGodController : MonoBehaviour
 			player.toggleThinkable(true);
 			if (firstTalk)
 			{
-			    player.SetThought("I fear to think I'm here", "I think therefore I am", goalReached, goalNotReached);
+			    player.SetThought("I fear to think I'm here", "I think therefore I am", goalReached, goalNotReached,puzzleHint);
 			    firstTalk = false;
 			}
 			

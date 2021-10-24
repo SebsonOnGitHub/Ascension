@@ -150,9 +150,9 @@ public class PlayerMovement : MonoBehaviour
     {
         thinkable = canAct;
     }
-    public void SetThought(string thought, string solution, UnityEvent solved, UnityEvent notSolved)
+    public void SetThought(string thought, string solution, UnityEvent solved, UnityEvent notSolved, string hint = "")
     {
-        thinkingController.SetThought(thought.ToUpper(), solution.ToUpper(), solved, notSolved);
+        thinkingController.SetThought(thought.ToUpper(), solution.ToUpper(), solved, notSolved, hint);
     }
     public void addSolution(string solution)
     {
@@ -186,6 +186,10 @@ public class PlayerMovement : MonoBehaviour
         wingAudio.Play();
     }
     
+    public void startNewThought()
+    {
+	StartCoroutine(newThought());
+    }
     public IEnumerator newThought()
     {
         Color color = candle.GetComponent<SpriteRenderer>().color;
@@ -195,6 +199,12 @@ public class PlayerMovement : MonoBehaviour
 
         while (color.a < 1)
         {
+	    if(isThinking())
+	    {
+		color.a = 0f;
+		candle.GetComponent<SpriteRenderer>().color = color;
+		break;
+	    }
             color.a += 20f/255f;
             candle.GetComponent<SpriteRenderer>().color = color;
             yield return new WaitForSecondsRealtime(speed);
@@ -202,6 +212,14 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.5f);
         while (color.a > 0)
         {
+
+	     if(isThinking())
+	    {
+		
+		color.a = 0f;
+		candle.GetComponent<SpriteRenderer>().color = color;
+		break;
+	    }
             color.a -= 20f/255f;
             candle.GetComponent<SpriteRenderer>().color = color;
             yield return new WaitForSecondsRealtime(speed);

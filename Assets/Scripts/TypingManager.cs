@@ -12,10 +12,15 @@ public class TypingManager : MonoBehaviour
     public Text currDisplay;
     public Text pointerDisplay;
     public Text removedDisplay;
+    public Text hintDisplay;
     private KeyCode prevKey;
     string pointerSymbol = "|";
     float timeInterval = 0;
     float timeAnimation = 0;
+    public float hintWaitTime;
+    private float hintWait;
+    private string hintText;
+    public puzzle_hint_controller puzzleHint;
 
     void setpointer()
     {
@@ -41,24 +46,28 @@ public class TypingManager : MonoBehaviour
     
     void Start()
     {
+	hintWait = hintWaitTime;
 	currDisplay.text = sentence.startText;
 	sentence.pointerIndex = sentence.startText.Length;
+	hintText = "being stuck is a state of mind";
 	setpointer();
     }
 
     void Update() //fixedUpdate doesn't work here
     {
-        if(sentence.isGoalReached(thinkingController))
-		{
-			updateDisplay();
-			return;
-		}
+	if(sentence.isGoalReached(thinkingController))
+	{
+	    updateDisplay();
+	    resetHint(hintWaitTime);
+	    return;
+	}
         timeInterval += Time.deltaTime;
         timeAnimation += Time.deltaTime;
 	
-        currDisplay.gameObject.SetActive(thinkingController.isThinkingIdle());
+	currDisplay.gameObject.SetActive(thinkingController.isThinkingIdle());
         removedDisplay.gameObject.SetActive(thinkingController.isThinkingIdle());
 	pointerDisplay.gameObject.SetActive(thinkingController.isThinkingIdle() && (timeAnimation >= 0.4) && (sentence.currText != "" || sentence.removedText != ""));
+	hintDisplay.gameObject.SetActive(thinkingController.isThinkingIdle() && hintWait <=0);
 	
 	if (timeAnimation >=0.8)
 	    timeAnimation =0;
@@ -66,6 +75,8 @@ public class TypingManager : MonoBehaviour
 
 	if (thinkingController.isThinkingIdle() && prevKey == KeyCode.None)
 	{
+	    if(sentence.currText != "")
+		hintWait -= Time.deltaTime;
 	    if (Input.GetKey(KeyCode.LeftArrow) & sentence.pointerIndex > 0)
 	    {
 		sentence.pointerIndex--;
@@ -75,6 +86,19 @@ public class TypingManager : MonoBehaviour
 	    {
 		sentence.pointerIndex++;
 		prevKey = KeyCode.RightArrow;
+	    }
+	    else if(Input.GetKey(KeyCode.Delete) &sentence.pointerIndex < sentence.currText.Length)
+	    {
+		//delete following character
+		prevKey = KeyCode.Delete;
+		if (Char.IsLetterOrDigit(sentence.currText[sentence.pointerIndex]))
+		    sentence.removedText = sentence.removedText + sentence.currText[sentence.pointerIndex];
+		sentence.currText = sentence.currText.Remove(sentence.pointerIndex, 1);
+	    }
+	    else if (Input.GetKey(KeyCode.UpArrow) && hintWait<=0)
+	    {
+		prevKey = KeyCode.UpArrow;
+		puzzleHint.showBox(hintText);
 	    }
 	}
 	if (Input.GetKeyUp(prevKey))
@@ -109,11 +133,10 @@ public class TypingManager : MonoBehaviour
 			sentence.currText = curr.Remove(sentence.pointerIndex, 1);
 	    }
 	}
-	  
 	updateDisplay();
     }
     
-    public void SetThought (string thought, List<string> solution, UnityEvent solved ,UnityEvent notSolved)
+    public void SetThought (string thought, List<string> solution, UnityEvent solved ,UnityEvent notSolved, string hint = "")
     {
 	sentence.startText = thought;
 	sentence.currText = thought;
@@ -123,6 +146,14 @@ public class TypingManager : MonoBehaviour
 	updateDisplay();
 	sentence.goalNotReached = notSolved;
 	sentence.goalReached=solved;
+	resetHint(hintWaitTime);
+	hintText = hint;
+    }
+
+    public void resetHint(float arg)
+    {
+	hintWait  = arg;
+	puzzleHint.closeBox();
 	
     }
     public void addSolution(string solution)
