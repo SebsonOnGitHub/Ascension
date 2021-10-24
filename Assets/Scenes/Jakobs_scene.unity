@@ -2196,7 +2196,7 @@ MonoBehaviour:
       m_Calls: []
   voicePitch: 0.39
   talkingSpeed: 5
-  puzzleHint: Even you are divine..
+  puzzleHint: 'You are '
 --- !u!95 &507234876
 Animator:
   serializedVersion: 3
@@ -3792,7 +3792,7 @@ MonoBehaviour:
   pointerDisplay: {fileID: 1800509522}
   removedDisplay: {fileID: 1718989140}
   hintDisplay: {fileID: 199987068}
-  hintWaitTime: 5
+  hintWaitTime: 34
   puzzleHint: {fileID: 199987065}
 --- !u!4 &943020658
 Transform:
@@ -32564,7 +32564,7 @@ MonoBehaviour:
       m_Calls: []
   voicePitch: 0.39
   talkingSpeed: 1
-  puzzleHint: you need to tune in
+  puzzleHint: you have to listen
 --- !u!61 &1946518781
 BoxCollider2D:
   m_ObjectHideFlags: 0
