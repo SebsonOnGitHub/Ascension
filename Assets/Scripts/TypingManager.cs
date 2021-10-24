@@ -49,7 +49,7 @@ public class TypingManager : MonoBehaviour
 	hintWait = hintWaitTime;
 	currDisplay.text = sentence.startText;
 	sentence.pointerIndex = sentence.startText.Length;
-	hintText = "being stuck is a state of mind";
+	hintText = "If only you could move...";
 	setpointer();
     }
 
@@ -75,8 +75,8 @@ public class TypingManager : MonoBehaviour
 
 	if (thinkingController.isThinkingIdle() && prevKey == KeyCode.None)
 	{
-	    if(sentence.currText != "")
-		hintWait -= Time.deltaTime;
+	    if(sentence.currText != "" || sentence.removedText!="")
+			hintWait -= Time.deltaTime;
 	    if (Input.GetKey(KeyCode.LeftArrow) & sentence.pointerIndex > 0)
 	    {
 		sentence.pointerIndex--;

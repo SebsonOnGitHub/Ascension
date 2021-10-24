@@ -31,13 +31,13 @@ public class puzzle_hint_controller : MonoBehaviour
     }
     public void closeBox()
     {
-	keyHint.text = "press Up for a hint";
+	keyHint.text = "Press Up for a hint";
 	hintBox.gameObject.SetActive(false);
 	hintText.gameObject.SetActive(false);
     }
     void FixedUpdate()
     {
-	hintBox.gameObject.SetActive(hintText.gameObject.active);
+	    hintBox.gameObject.SetActive(hintText.gameObject.activeSelf);
     }
     
 

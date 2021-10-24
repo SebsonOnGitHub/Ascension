@@ -78,7 +78,7 @@ public class NPCThoughtBubbleController : MonoBehaviour
 	        text.text=displayedText;
 	    }
 
-        yield return new WaitForSecondsRealtime(0);
+        yield return null;
         //AudioController.Dialogue_sound = false;
         NPCJacobMovement.activateGiveHalo();
     }

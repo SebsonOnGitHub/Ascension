@@ -20,13 +20,23 @@ public class CreditsDemoTrigger : MonoBehaviour
 
     private IEnumerator Fade()
     {
-        for (int x = 100; x > 0; x--)
+        for (int x = 25; x > 0; x--)
         {
-            backgroundSource.volume -= 0.0015f;
-            yield return new WaitForSecondsRealtime(0.015f);
+            backgroundSource.volume -= 0.0012f;
+            yield return new WaitForSecondsRealtime(0.06f);
         }
+
         backgroundSource.clip = demoCredits;
-        backgroundSource.volume = volume;
         backgroundSource.Play();
+
+        for (int x = 25; x > 0; x--)
+        {
+            backgroundSource.volume += 0.006f;
+            if (backgroundSource.volume >= volume)
+                break;
+            yield return new WaitForSecondsRealtime(0.06f);
+        }
+
+        backgroundSource.volume = volume;
     }
 }

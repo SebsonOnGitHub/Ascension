@@ -27,9 +27,9 @@ public class HaloController : MonoBehaviour
 
         while (halo.pointLightOuterRadius < newOuterMax && halo.pointLightInnerRadius < newInnerMax)
         {
-            halo.pointLightOuterRadius += 0.01f;
-            halo.pointLightInnerRadius += 0.01f;
-            yield return new WaitForSecondsRealtime(0.003f);
+            halo.pointLightOuterRadius += 0.2f;
+            halo.pointLightInnerRadius += 0.2f;
+            yield return new WaitForSecondsRealtime(0.06f);
         } 
     }
 }
