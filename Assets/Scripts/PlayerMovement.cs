@@ -173,6 +173,10 @@ public class PlayerMovement : MonoBehaviour
         wingAudio.Play();
     }
     
+    public void startNewThought()
+    {
+	StartCoroutine(newThought());
+    }
     public IEnumerator newThought()
     {
         Color color = candle.GetComponent<SpriteRenderer>().color;
@@ -182,6 +186,12 @@ public class PlayerMovement : MonoBehaviour
 
         while (color.a < 1)
         {
+	    if(isThinking())
+	    {
+		color.a = 0f;
+		candle.GetComponent<SpriteRenderer>().color = color;
+		break;
+	    }
             color.a += 1f/255f;
             candle.GetComponent<SpriteRenderer>().color = color;
             yield return new WaitForSecondsRealtime(speed);
@@ -189,6 +199,13 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.5f);
         while (color.a > 0)
         {
+	     if(isThinking())
+	    {
+		
+		color.a = 0f;
+		candle.GetComponent<SpriteRenderer>().color = color;
+		break;
+	    }
             color.a -= 1f/255f;
             candle.GetComponent<SpriteRenderer>().color = color;
             yield return new WaitForSecondsRealtime(speed);
