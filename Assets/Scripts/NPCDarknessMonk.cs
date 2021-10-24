@@ -57,6 +57,8 @@ public class NPCDarknessMonk : MonoBehaviour
     
     void Update()
     {
+		player.toggleSpaceHint(playerInColBox & !talking, 2);
+
 	if(prevKey == KeyCode.None)
 	{
         /********** DEBUG **********/
@@ -71,6 +73,7 @@ public class NPCDarknessMonk : MonoBehaviour
 		
 		player.addSolution("i am a holy being");
 		firstTalk = false;
+		talking = false;
 		player.toggleThinkable(true);
 		player.toggleMovable(true);
 		//Destroy(GetComponent<BoxCollider2D>());
@@ -84,7 +87,6 @@ public class NPCDarknessMonk : MonoBehaviour
 		{
 		    if (speech_bubble.isDone() && firstTalk )
 		    {
-			Debug.Log(speech_bubble.isDone());
 			firstTalk = false;
 			ThoughtSizeController.setFontSize(30);
 			player.SetThought("a holy being is human", "being a human is holy", goalReached, goalNotReached, puzzleHint);
