@@ -60,7 +60,7 @@ public class NPC1Movement : MonoBehaviour
 		        if(Input.GetKeyDown(KeyCode.Space) && speech_bubble.isDone() || Input.GetKeyDown(KeyCode.F1))
 			{
 		            CutSceneManager.IncreaseCutScene();
-			    player.startNewThought();;
+			    player.startNewThought();
 			}
                 break;
             case 4: // walk away and reveal the hint.

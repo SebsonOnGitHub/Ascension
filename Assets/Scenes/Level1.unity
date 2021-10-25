@@ -23022,6 +23022,7 @@ MonoBehaviour:
   wingAudio: {fileID: 2134207861}
   thoughtAudio: {fileID: 286571016}
   dialogueAudio: {fileID: 1570382861}
+  trailerspeed: 0
   speed: 5
   movable: 0
   thinkable: 0
@@ -35731,7 +35732,7 @@ AudioSource:
     type: 2}
   m_audioClip: {fileID: 8300000, guid: 4c1747368b068604c81c722b051157c7, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.32
   m_Pitch: 1
   Loop: 0
   Mute: 0

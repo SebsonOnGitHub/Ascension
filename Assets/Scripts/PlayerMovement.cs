@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource wingAudio;
     public AudioSource thoughtAudio;
     public AudioSource dialogueAudio;
+    public float trailerspeed;
 
     private Rigidbody2D body;
     private Animator anim;
@@ -83,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
             case 10:
                 break;
             case 11:
-                transform.position = new Vector3(transform.position.x, transform.position.y + 0.015f, transform.position.z);
+                transform.position = new Vector3(transform.position.x, transform.position.y + 0.015f + trailerspeed, transform.position.z);
                 toggleThinkable(false);
                 break;
             case 12:
